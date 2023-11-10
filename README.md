@@ -7,7 +7,7 @@
 # Passo a passo
 Clone o repositório no diretório desejado da sua máquina através da CLI
 ```sh
-git clone https://github.com/pingueventos/webpage pingu-webpage
+git clone -b develop https://github.com/pingueventos/webpage pingu-webpage
 ```
 
 Acesse o diretório clonado através da CLI
