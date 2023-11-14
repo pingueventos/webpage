@@ -63,10 +63,23 @@ docker compose exec app bash
 > php artisan key:generate
 > ```
 >
+> Crie as tabelas no banco de dados
+> ```sh
+> php artisan migrate
+> ```
+>
 > Adicione os usuários primários no banco de dados
 > ```sh
 > php artisan db:seed --class=UserSeeder
 > ```
+
+Descomente as linhas a seguir do arquivo /app/Providers/AppServiceProvider.php (apague as '//')
+
+```sh
+# Descomente as duas linhas abaixo        
+//        $solicitacao=DB::table('solicitacoes')->get();
+//        View::share('solicitacoes', $solicitacao);
+```
 
 
 Acesse o projeto acessando o link abaixo em algum web browser<br>

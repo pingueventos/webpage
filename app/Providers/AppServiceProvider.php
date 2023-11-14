@@ -19,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {        
-        $solicitacao=DB::table('solicitacoes')->get();
-        View::share('solicitacoes', $solicitacao);
+    {
+# Descomente as duas linhas abaixo        
+//        $solicitacao=DB::table('solicitacoes')->get();
+//        View::share('solicitacoes', $solicitacao);
     }
 }
