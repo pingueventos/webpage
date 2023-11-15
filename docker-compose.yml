@@ -20,7 +20,7 @@ services:
         image: nginx:alpine
         restart: unless-stopped
         ports:
-            - "8989:80"
+            - "1606:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
@@ -29,6 +29,7 @@ services:
 
     # db mysql
     db:
+        container_name: setup-mysql
         image: mysql:5.7.22
         restart: unless-stopped
         environment:
@@ -37,11 +38,25 @@ services:
             MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
             MYSQL_USER: ${DB_USERNAME:-username}
         volumes:
-            - ./.docker/mysql/dbdata:/var/lib/mysql
+            - ./volumes/db:/var/lib/mysql
         ports:
             - "3388:3306"
         networks:
             - laravel
+
+    # PHPMyAdmin
+    phpmyadmin:
+        container_name: setup-phpmyadmin
+        image: phpmyadmin:5.2
+        restart: always
+        ports:
+            - '8888:80'
+        networks:
+            - laravel
+        environment:
+            PMA_HOST: setup-mysql
+        depends_on:
+            - db
 
     # queue
     queue:
