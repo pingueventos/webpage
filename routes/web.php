@@ -10,12 +10,14 @@ use App\Http\Controllers\CancelarReservaAniversController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SolicitacaoController;
 use App\Http\Controllers\SolicitacaoAdminController;
+use App\Http\Controllers\paginapublica\InicialController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', [InicialController::class, 'display'])->name('inicial.display');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,7 +29,7 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard']) -> name('admindashboard');
-    
+
     Route::get('admin/dashboard/agenda', function(){
         return view('admin.agenda-buffet.agenda');
     }) -> name('agenda');
@@ -39,7 +41,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
 
     Route::get('admin/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoes');
-    
+
     Route::get('admin/dashboard/festasaprovadas', function(){
         return view('admin.lista-solicitacoes.aprovadas');
     }) -> name('aprovada');
@@ -65,7 +67,7 @@ Route::middleware(['auth','role:operac'])->group(function () {
 
 Route::middleware(['auth','role:anivers'])->group(function () {
     Route::get('anivers/dashboard', [AniversController::class, 'dashboard']) -> name('aniversdashboard');
-    
+
     Route::get('anivers/dashboard/solicitar_reserva', function(){
         return view('anivers.solicitacao.solicitacao');
     }) -> name('solicitar_reserva');

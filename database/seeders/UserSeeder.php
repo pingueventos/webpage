@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\DB;
 class UserSeeder extends Seeder
 {
     public function run()
-    { 
+    {
         $userData = [
             'name' => 'Aniversariante',
             'email' => 'pingu@anivers.com',
 # Defina a senha do usuário teste aniversariante
-            'password' => Hash::make(''),
+            'password' => Hash::make('a'),
             'role' => 'anivers'
         ];
 
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'name' => 'Operacional',
                 'email' => 'pingu@operac.com',
 # Defina a senha do usuário operacional
-                'password' => Hash::make(''),
+                'password' => Hash::make('a'),
                 'role' => 'operac',
             ],
 
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 'name' => 'Comercial',
                 'email' => 'pingu@comerc.com',
 # Defina a senha do usuário comercial
-                'password' => Hash::make(''),
+                'password' => Hash::make('a'),
                 'role' => 'comerc'
             ],
 
@@ -43,11 +43,11 @@ class UserSeeder extends Seeder
                 'name' => 'Administrativo',
                 'email' => 'pingu@admin.com',
 # Defina a senha do usuário administrativo
-                'password' => Hash::make(''),
+                'password' => Hash::make('a'),
                 'role' => 'admin',
             ],
         ]);
-        
+
         $user_id = DB::table('users')->insertGetId($userData);
 
         DB::table('solicitacoes')->insert([
