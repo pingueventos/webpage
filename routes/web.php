@@ -32,9 +32,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
         return view('admin.agenda-buffet.agenda');
     }) -> name('agenda');
 
-    Route::get('admin/dashboard/pacotesdecomida', function(){
-        return view('admin.lista-comida.comida');
+    Route::resource("/admin/pacotescomida", PacotesController::class);
+
+    Route::get('admin/pacotesdecomida', function(){
+        return view('admin.lista-comida.pacotes-all');
     }) -> name('pacotes');
+
+    // Route::get('admin/dashboard/pacotesdecomida', function(){
+    //     return view('admin.lista-comida.comida');
+    // }) -> name('pacotes');
 
     Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
 
@@ -88,4 +94,5 @@ Route::middleware(['auth','role:anivers'])->group(function () {
 
     Route::resource("/anivers/novafesta", SolicitacaoController::class);
 });
+// Route::post("/forms/{festaid}", [ConvidadosController::class, 'display']) -> name('paraforms');
 Route::resource("/forms", ConvidadosController::class);

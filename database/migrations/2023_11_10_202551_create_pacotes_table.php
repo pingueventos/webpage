@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('comidas');
             $table->text('bebidas');
-            // $table->text('imagem1')->nullable();
-            // $table->text('imagem2')->nullable();
-            // $table->text('imagem3')->nullable();
+            $table->text('imagem1');
+            $table->text('imagem2');
+            $table->text('imagem3');
+            $table->integer('preco');
             $table->timestamps();
         });
     }

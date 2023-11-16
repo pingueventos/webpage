@@ -22,40 +22,44 @@
     <li>3 Imagens</li>
     <li>Preco</li>
 </ul> --}}
-<br><h3 align="center">Novo Pacote</h3>
-<form action="{{ route('pacotescomida.store') }}" method="POST" enctype="multipart/form-data">
+<br><h3 align="center">Editar Pacote</h3>
+<form action="{{ route('pacotescomida.update', $pacote->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <div class="form-group">
     <label>Título</label><br>
-    <input name="titulo" type="text" placeholder=""><br><br>
+    <input name="titulo" type="text"  value="{{ $pacote->titulo }}" placeholder=""><br><br>
 
         <div>
             <label for="comidas">Pacote Comida</label>
-            <textarea name="comidas" id="comidas" cols="30" rows="10"></textarea><br><br>
+            <textarea name="comidas" id="comidas" cols="30" rows="10">{{ old('comidas', $pacote->comidas) }}</textarea><br><br>
         </div>
 
         <label>Pacote Bebidas</label>
-            <textarea name="bebidas" id="bebidas" cols="30" rows="10"></textarea><br><br>
+            <textarea name="bebidas" id="bebidas" cols="30" rows="10">{{ old('bebidas', $pacote->bebidas) }}</textarea><br><br>
 
+        <img style="width: 300px; height: 300px;" src="{{asset("storage/". $pacote->imagem1)  }}" alt="Imagem Atual">
         <div class="mb-6">
-            <label for="">Imagem 1</label><br>
+            <label for="">Editar Imagem 1</label><br>
                 <input type="file" name="imagem1" >
-        </div>
+        </div><br><br>
 
+        <img style="width: 300px; height: 300px;" src="{{asset("storage/". $pacote->imagem2)  }}" alt="Imagem Atual">
         <div class="mb-6">
-            <br><label for="">Imagem 2</label><br>
+            <br><label for="">Editar Imagem 2</label><br>
                 <input type="file" name="imagem2" >
-        </div>
+        </div><br><br>
 
+        <img style="width: 300px; height: 300px;" src="{{asset("storage/". $pacote->imagem3)  }}" alt="Imagem Atual">
         <div class="mb-6">
-            <br><label for="">Imagem 3</label><br>
+            <br><label for="">Editar Imagem 3</label><br>
                 <input type="file" name="imagem3" >
-        </div>
+        </div><br><br><br>
 
         <label>Preço em reais</label><br>
-        <input name="preco" type="number" placeholder=""><br><br>
+        <input name="preco" type="number" value="{{ $pacote->preco }}"  placeholder=""><br><br>
 
-        <input type="submit" class="btn btn-primary" value="Adicionar">
+        <input type="submit" class="btn btn-primary" value="Atualizar">
 
         <script>
             ClassicEditor
@@ -71,15 +75,6 @@
                     console.error( error );
                 } );
         </script>
-     
-        {{-- <label for="image">Imagem 1</label>
-        <input type="file" name="imagem1">
-
-        <label for="image">Imagem 2</label>
-        <input type="file" name="imagem2">
-
-        <label for="image">Imagem 3</label>
-        <input type="file" name="imagem3"> --}}
 </form>
     </div>
 

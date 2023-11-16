@@ -25,15 +25,34 @@ class PacotesController extends Controller
     
     public function store(Request $request)
     {     
-        $user = Pacotes::create([
+        Pacotes::create([
             'titulo' => $request->titulo,
-            'pacotes-trixFields' => $request->'pacotes-trixFields',
+            'comidas' => $request->comidas,
             'bebidas' => $request->bebidas,
-            // 'imagem1' => $request->image->store('users'),
-            // 'imagem2' => $request->image->store('users'),
-            // 'imagem3' => $request->image->store('users'),
+            'imagem1' => $request->imagem1->store('imagens'),
+            'imagem2' => $request->imagem2->store('imagens'),
+            'imagem3' => $request->imagem3->store('imagens'),
+            'preco' => $request->preco,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success','Pacote adicionado com sucesso!');
+    }
+
+    public function edit(string $id)
+    {
+        $pacote = Pacotes::findOrFail($id);
+        return view('admin.lista-comida.editarpacote',compact('pacote'));
+
+
+        // $response['pacote'] = $this->pacote->find($id);
+        // return view('admin.lista-comida.editarpacote',compact('response'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $pacote = Pacotes::findOrFail($id);
+        $pacote->update($request->all());
+        // $pacote->update(array_merge($pacote->toArray(), $request->toArray()));
+        return redirect()->route('pacotes', ['success' => 'Pacote atualizado com sucesso!']);
     }
 
     public function destroy(string $id)

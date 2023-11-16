@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Solicitacao;
+use App\Models\Pacotes;
 use Illuminate\Http\RedirectResponse;
 
 class SolicitacaoController extends Controller
@@ -22,6 +23,21 @@ class SolicitacaoController extends Controller
     
     public function store(Request $request)
     {
+        $pacotecomida = $request->input('pacotecomida');
+        
+        $pacote = Pacotes::where('titulo', $pacotecomida)->first();
+    
+        $idDoPacote = $pacote->id;
+        $comidas = $pacote->comidas;
+        $bebidas = $pacote->bebidas;
+        $imagem1 = $pacote->imagem1;
+        $imagem2 = $pacote->imagem2;
+        $imagem3 = $pacote->imagem3;
+
+        $userId = auth()->id();
+    
+        $request->merge(['id_pacote' => $idDoPacote]);
+
         $request->validate([
             'start' => ['required', 'integer'],
             'end' => ['required', 'integer'],
@@ -30,7 +46,6 @@ class SolicitacaoController extends Controller
             'idade.required' => 'Campo obrigatório'
 
         ]);
-        $userId = auth()->id();
 
         Solicitacao::create([
             'user_id' => $userId,
@@ -39,6 +54,12 @@ class SolicitacaoController extends Controller
             'numconvidados' => $request->numconvidados,
             'idade' => $request->idade,
             'pacotecomida' => $request->pacotecomida,
+            'id_pacote' => $idDoPacote,
+            'comida_pacote' => $comidas,
+            'bebida_pacote' => $bebidas,
+            'imagem1_pacote' => $imagem1,
+            'imagem2_pacote' => $imagem2,
+            'imagem3_pacote' => $imagem3,
         ]);
         return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
     }

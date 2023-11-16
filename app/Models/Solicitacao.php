@@ -15,10 +15,19 @@ class Solicitacao extends Model
         'numconvidados',
         'idade',
         'pacotecomida',
+        'id_pacote',
+        'comida_pacote',
+        'bebida_pacote',
+        'imagem1_pacote',
+        'imagem2_pacote',
+        'imagem3_pacote',
         'status',
     ];
     public function user():BelongsTo {
       return $this->belongsTo(User::class,'user_id');
-  }
+    }
+    public function pacote():BelongsTo {
+      return $this->belongsTo(Pacote::class, 'id_pacote');
+    }
     use HasFactory;
 }

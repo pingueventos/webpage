@@ -14,10 +14,16 @@ class ConvidadosController extends Controller
         
     }
 
-    public function index()
+    // public function display($festaid)
+    // {
+    //     $response['convidados'] = $this->convidado->all();
+    //     return view('anivers.forms.index')->with($response);
+    // }
+
+    public function show($festaid)
     {
         $response['convidados'] = $this->convidado->all();
-        return view('anivers.forms.index')->with($response);
+        return view('anivers.forms.index', ['festaId' => $festaid])->with($response);
     }
     
     public function store(Request $request)
@@ -31,10 +37,11 @@ class ConvidadosController extends Controller
 
         ]);
 
-        $user = Convidado::create([
+        Convidado::create([
             'nome' => $request->nome,
             'CPF' => $request->CPF,
             'idade' => $request->idade,
+            'festa_id' => $request->idFesta,
         ]);
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
     }

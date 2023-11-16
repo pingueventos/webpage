@@ -30,6 +30,9 @@
 
                         </div>
                     </div>
+
+                    <input type="hidden" name="idFesta" value="{{  $festaId  }}">
+
                     <div class="row">
                         <div class="container mt-3" align="right">
                             <input type="submit" class="btn btn-primary" value="Register">
@@ -56,23 +59,26 @@
                       </tr>
                     </thead>
                     <tbody>
-
-                        @foreach ( $convidados as $key => $convidado )
-
-                        <tr>
-                            <td scope="col">{{ ++$key }}</td>
-                            <td scope="col">{{ $convidado->nome }}</td>
-                            <td scope="col">{{ $convidado->CPF }}</td>
-                            <td scope="col">{{ $convidado->idade }}</td>
-                            <td scope="col">
-                    
-                            <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
-                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                            </form>
-                            </td>
-                        </tr>
+                        @php
+                            $contador=0;
+                        @endphp    
+                        @foreach ( $convidados as $convidado )
+                            @if ($convidado->festa_id == $festaId)
+                                <tr>
+                                    <td scope="col">{{ ++$contador }}</td>
+                                    <td scope="col">{{ $convidado->nome }}</td>
+                                    <td scope="col">{{ $convidado->CPF }}</td>
+                                    <td scope="col">{{ $convidado->idade }}</td>
+                                    <td scope="col">
+                            
+                                    <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                                    </form>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
