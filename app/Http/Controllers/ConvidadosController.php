@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Convidado;
 use Illuminate\Http\RedirectResponse;
+use DB;
 
 class ConvidadosController extends Controller
 {
     protected $convidado;
     public function __construct(){
         $this->convidado = new Convidado();
-        
+
     }
 
     // public function display($festaid)
@@ -23,9 +24,10 @@ class ConvidadosController extends Controller
     public function show($festaid)
     {
         $response['convidados'] = $this->convidado->all();
-        return view('anivers.forms.index', ['festaId' => $festaid])->with($response);
+        $usuarioid = DB::table('solicitacoes')->where('id', $festaid)->value('user_id');
+        return view('anivers.forms.index', ['festaId' => $festaid, 'usuarioId' => $usuarioid])->with($response);
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -42,6 +44,7 @@ class ConvidadosController extends Controller
             'CPF' => $request->CPF,
             'idade' => $request->idade,
             'festa_id' => $request->idFesta,
+            'user_id' => $request->idUsuario,
         ]);
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
     }

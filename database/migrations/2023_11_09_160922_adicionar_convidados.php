@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('CPF');
             $table->integer('idade');
             $table->foreignId('festa_id');
+            $table->integer('user_id')->default(4);
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-# Descomente as duas linhas abaixo        
+# Descomente as duas linhas abaixo
        $solicitacao=DB::table('solicitacoes')->get();
        View::share('solicitacoes', $solicitacao);
 

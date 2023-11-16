@@ -32,6 +32,7 @@
                     </div>
 
                     <input type="hidden" name="idFesta" value="{{  $festaId  }}">
+                    <input type="hidden" name="idUsuario" value="{{  $usuarioId  }}">
 
                     <div class="row">
                         <div class="container mt-3" align="right">
@@ -40,14 +41,20 @@
 
                     </div>
                 </form>
-           
+
             </div>
             @if (session('success'))
-                    <div class="alert alert-success"> 
+                    <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                @endif
+            @endif
+
+            @php
+            $authId = DB::table('convidados')->where('festa_id',$festaId)->value('user_id');
+            @endphp
+
             @auth
+            @if($authId == auth()->id())
                 <table class="table mt-5">
                     <thead>
                       <tr>
@@ -61,8 +68,9 @@
                     <tbody>
                         @php
                             $contador=0;
-                        @endphp    
+                        @endphp
                         @foreach ( $convidados as $convidado )
+                            {{-- @if ($convidado->user_id == auth()->id()) --}}
                             @if ($convidado->festa_id == $festaId)
                                 <tr>
                                     <td scope="col">{{ ++$contador }}</td>
@@ -70,7 +78,7 @@
                                     <td scope="col">{{ $convidado->CPF }}</td>
                                     <td scope="col">{{ $convidado->idade }}</td>
                                     <td scope="col">
-                            
+
                                     <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
                                     @csrf
                                     @method('DELETE')
@@ -79,9 +87,11 @@
                                     </td>
                                 </tr>
                             @endif
+                            {{-- @endif --}}
                         @endforeach
                     </tbody>
                 </table>
+                @endif
             @endauth
             </div>
         </div>
