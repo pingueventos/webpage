@@ -84,6 +84,8 @@ Route::middleware(['auth','role:anivers'])->group(function () {
         return view('anivers.reserva-aprovada.reservaconcluida');
     }) -> name('pesquisadesatisfacao');
 
+    Route::post('admin/formulario/{id}', [ConvidadosController::class, 'updateStatus'])->name('status.update');
+
     Route::get('/formulario', function(){
         return view('anivers.forms.formulario');
     }) -> name('formulario');

@@ -20,6 +20,11 @@ Crie um arquivo para as variáveis de ambiente através da CLI
 cp .env.generationfile .env
 ```
 
+Posicione as imagens dos pacotes bases através da CLI
+```sh
+cp -r imagens storage/app/public
+```
+
 Defina suas informações de login dentro do arquivo .env adicionando as informações nas linhas (após o "=")
 ```sh
 # Adicione o nome de usuário da sua base de dados
@@ -68,17 +73,24 @@ docker compose exec app bash
 > php artisan migrate
 > ```
 >
-> Adicione os usuários primários no banco de dados
+> Adicione os dados iniciais no banco de dados
 > ```sh
-> php artisan db:seed --class=UserSeeder
+> php artisan db:seed
+> ```
+>
+> Faça a conexão do caminho das imagens 
+> ```sh
+> php artisan storage:link
 > ```
 
 Descomente as linhas a seguir do arquivo /app/Providers/AppServiceProvider.php (apague as '//')
 
 ```sh
-# Descomente as duas linhas abaixo        
+# Descomente as quatro linhas abaixo        
 //        $solicitacao=DB::table('solicitacoes')->get();
 //        View::share('solicitacoes', $solicitacao);
+//        $pacote=DB::table('pacotes')->get();
+//        View::share('pacotes', $pacote);
 ```
 
 

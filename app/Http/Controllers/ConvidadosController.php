@@ -49,6 +49,15 @@ class ConvidadosController extends Controller
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
     }
 
+    public function updateStatus(string $id)
+    {
+        $novoStatus = request()->input('novo_status');
+        $convidado = Convidado::find($id);
+        $convidado->update(['status' => $novoStatus]);
+
+        return redirect()->back()->with('success', 'Status atualizado com sucesso.');
+    }
+
     public function destroy(string $id)
     {
         $convidado = $this->convidado->find($id);

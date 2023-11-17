@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('imagem1');
             $table->text('imagem2');
             $table->text('imagem3');
-            $table->integer('preco');
+            $table->float('preco');
             $table->timestamps();
         });
     }

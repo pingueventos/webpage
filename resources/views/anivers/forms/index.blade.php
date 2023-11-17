@@ -62,6 +62,8 @@
                         <th scope="col">Convidado</th>
                         <th scope="col">CPF</th>
                         <th scope="col">Idade</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ação</th>
                         <th scope="col">Apagar</th>
                       </tr>
                     </thead>
@@ -78,13 +80,31 @@
                                     <td scope="col">{{ $convidado->CPF }}</td>
                                     <td scope="col">{{ $convidado->idade }}</td>
                                     <td scope="col">
-
-                                    <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                                    </form>
+                                        @if ($convidado->status === 0)
+                                            <p>Em espera</a></td>
+                                        @elseif ($convidado->status == 1)
+                                            <p class="text-success">Aprovado</p>
+                                        @endif
                                     </td>
+
+                                    @if ($convidado->status == 0)
+                                        <form action="{{ route('status.update', ['id' => $convidado->id]) }}" method="post">
+                                            @csrf
+                                            <td scope="col">            
+                                                <input type="hidden" name="novo_status" value="1">
+                                                <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
+                                            </td>
+                                        </form>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                        <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
+                                            @csrf
+                                            <td scope="col">
+                                                @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Negar</button>
+                                            </td>
+                                        </form>
                                 </tr>
                             @endif
                             {{-- @endif --}}

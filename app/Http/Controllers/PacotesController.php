@@ -41,17 +41,12 @@ class PacotesController extends Controller
     {
         $pacote = Pacotes::findOrFail($id);
         return view('admin.lista-comida.editarpacote',compact('pacote'));
-
-
-        // $response['pacote'] = $this->pacote->find($id);
-        // return view('admin.lista-comida.editarpacote',compact('response'));
     }
 
     public function update(Request $request, string $id)
     {
         $pacote = Pacotes::findOrFail($id);
         $pacote->update($request->all());
-        // $pacote->update(array_merge($pacote->toArray(), $request->toArray()));
         return redirect()->route('pacotes', ['success' => 'Pacote atualizado com sucesso!']);
     }
 

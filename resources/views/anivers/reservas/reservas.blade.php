@@ -42,7 +42,7 @@
                             @else
                                 <p class="text-secondary">Finalizada</p>
                             @endif
-                        
+                        </td>
                         {{-- @if ($solicitacao->status !== 2) --}}
 
                         @if ($solicitacao->status === 0)
