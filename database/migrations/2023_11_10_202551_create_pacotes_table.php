@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pacotes', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('titulo')->unique();
             $table->text('comidas');
             $table->text('bebidas');
             $table->text('imagem1');

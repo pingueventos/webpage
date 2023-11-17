@@ -12,7 +12,7 @@ class SolicitacaoController extends Controller
     protected $solicitacao;
     public function __construct(){
         $this->solicitacao = new Solicitacao();
-        
+
     }
 
     public function index()
@@ -20,13 +20,13 @@ class SolicitacaoController extends Controller
         $response['solicitacoes'] = $this->solicitacao->all();
         return view('anivers.solicitacao.novafesta')->with($response);
     }
-    
+
     public function store(Request $request)
     {
         $pacotecomida = $request->input('pacotecomida');
-        
+
         $pacote = Pacotes::where('titulo', $pacotecomida)->first();
-    
+
         $idDoPacote = $pacote->id;
         $comidas = $pacote->comidas;
         $bebidas = $pacote->bebidas;
@@ -36,7 +36,7 @@ class SolicitacaoController extends Controller
         $precopacote = $pacote->preco;
 
         $userId = auth()->id();
-    
+
         $request->merge(['id_pacote' => $idDoPacote]);
 
         $request->validate([
@@ -69,7 +69,7 @@ class SolicitacaoController extends Controller
 
     public function destroy(string $id)
     {
-        
+
         // $solicitacao = $this->solicitacao->find($id);
         // $solicitacao->delete();
         // return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
@@ -100,16 +100,17 @@ class SolicitacaoController extends Controller
 
     public function pacoteEdit($id)
     {
+        $tabelaPacotes = Pacotes::all();
         $solicitacao = Solicitacao::find($id);
-        return view('anivers.reservas.editar-pacote')->with('solicitacao', $solicitacao);
+        return view('anivers.reservas.editar-pacote')->with('solicitacao', $solicitacao)->with('tabelapacotes', $tabelaPacotes);
     }
 
 
     public function update(Request $request, $id)
     {
     $solicitacao = Solicitacao::find($id);
-    
-    $solicitacao->pacotecomida = $request->input('pacotecomida');    
+
+    $solicitacao->pacotecomida = $request->input('pacotecomida');
     $pacote = Pacotes::where('titulo', $solicitacao->pacotecomida)->first();
 
     $solicitacao->id_pacote = $pacote->id;
