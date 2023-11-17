@@ -62,6 +62,16 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 Route::middleware(['auth','role:comerc'])->group(function () {
     Route::get('comerc/dashboard', [ComercController::class, 'dashboard']) -> name('comercdashboard');
+    Route::resource("/comerc/pacotescomida", PacotesController::class);
+
+    Route::get('comerc/pacotesdecomida', function(){
+        return view('admin.lista-comida.pacotes-all');
+    }) -> name('pacotes');
+
+    Route::post('comerc/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
+
+    Route::get('comerc/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoes');
+
 });
 
 Route::middleware(['auth','role:operac'])->group(function () {

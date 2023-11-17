@@ -70,9 +70,11 @@
     </div>
 
 
-<div class="text-center mt-3">
-    <a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
-</div>
+@if(auth()->id() == 3)
+<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
+@else 
+<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
+@endif
 
 
 @endsection
