@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('pacotes', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('titulo')->unique();
             $table->text('comidas');
             $table->text('bebidas');
-            // $table->text('imagem1')->nullable();
-            // $table->text('imagem2')->nullable();
-            // $table->text('imagem3')->nullable();
+            $table->text('imagem1');
+            $table->text('imagem2');
+            $table->text('imagem3');
+            $table->float('preco');
             $table->timestamps();
         });
     }

@@ -13,8 +13,15 @@ class Pacotes extends Model
         'titulo',
         'comidas',
         'bebidas',
-        // 'imagem1',
-        // 'imagem2',
-        // 'imagem3',
-    ];    use HasFactory;
+        'imagem1',
+        'imagem2',
+        'imagem3',
+        'preco',
+    ];    
+
+    public function solicitacao()
+    {
+        return $this->hasMany(Elemento::class, 'id_pacote');
+    }
+  use HasFactory;
 }

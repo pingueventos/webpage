@@ -11,6 +11,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Aniversariante</th>
                     <th scope="col">Número de Convidados</th>
                     <th scope="col">Idade Comemorada</th>
                     <th scope="col">Início da Festa</th>
@@ -28,6 +29,7 @@
                     <tr> 
                     {{-- @if ($solicitacao->id === Auth::user(id)) --}}
                         <td scope="col">{{ ++$key }}</td>
+                        <td scope="col">{{ $solicitacao->nome}}</td>
                         <td scope="col">{{ $solicitacao->numconvidados}}</td>
                         <td scope="col">{{ $solicitacao->idade }}</td>
                         <td scope="col">{{ $solicitacao->start }}</td>
@@ -74,6 +76,8 @@
                             <td></td>
                             @endif
                         </td>
+
+                
                     </tr>
                     @endforeach
                 </tbody>

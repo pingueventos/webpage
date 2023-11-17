@@ -14,11 +14,19 @@ return new class extends Migration
         Schema::create('solicitacoes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('nome')->nullable();
             $table->integer('start');
             $table->integer('end');
             $table->integer('numconvidados');
             $table->integer('idade');
-            $table->integer('pacotecomida');
+            $table->integer('id_pacote')->nullable();
+            $table->string('pacotecomida')->nullable();
+            $table->string('comida_pacote')->nullable();
+            $table->string('bebida_pacote')->nullable();
+            $table->string('imagem1_pacote')->nullable();
+            $table->string('imagem2_pacote')->nullable();
+            $table->string('imagem3_pacote')->nullable();
+            $table->string('preco_pacote')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });
