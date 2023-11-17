@@ -24,6 +24,7 @@ class Solicitacao extends Model
         'imagem3_pacote',
         'preco_pacote',
         'status',
+        'confirmados',
       ];
     public function user():BelongsTo {
       return $this->belongsTo(User::class,'user_id');

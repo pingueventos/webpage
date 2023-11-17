@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Solicitacao;
 use App\Models\Pacotes;
+use App\Models\Convidado;
 use Illuminate\Http\RedirectResponse;
 
 class SolicitacaoController extends Controller
@@ -128,5 +129,4 @@ class SolicitacaoController extends Controller
     return redirect()->back()->with('success', 'Pacote alterado com sucesso.');
 
     }
-
 }
