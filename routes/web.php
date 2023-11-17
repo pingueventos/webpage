@@ -36,15 +36,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
     Route::get('admin/pacotesdecomida', function(){
         return view('admin.lista-comida.pacotes-all');
-    }) -> name('pacotes');
+    }) -> name('pacotesAdmin');
 
     // Route::get('admin/dashboard/pacotesdecomida', function(){
     //     return view('admin.lista-comida.comida');
     // }) -> name('pacotes');
 
-    Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
+    Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovadoAdmin');
 
-    Route::get('admin/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoes');
+    Route::get('admin/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoesAdm');
     
     Route::get('admin/dashboard/festasaprovadas', function(){
         return view('admin.lista-solicitacoes.aprovadas');
@@ -76,6 +76,13 @@ Route::middleware(['auth','role:comerc'])->group(function () {
 
 Route::middleware(['auth','role:operac'])->group(function () {
     Route::get('operac/dashboard', [OperacController::class, 'dashboard']) -> name('operacdashboard');
+    Route::get('/convidados-presenca', function(){
+        return view('operac.reserva.presenca');
+    }) -> name('formulario');
+
+    Route::get('/convidados-presenca', function(){
+        return view('operac.reserva.aprovadas');
+    }) -> name('festas.operac');
 });
 
 
@@ -94,8 +101,6 @@ Route::middleware(['auth','role:anivers'])->group(function () {
         return view('anivers.reserva-aprovada.reservaconcluida');
     }) -> name('pesquisadesatisfacao');
 
-    Route::post('admin/formulario/{id}', [ConvidadosController::class, 'updateStatus'])->name('status.update');
-
     Route::get('/formulario', function(){
         return view('anivers.forms.formulario');
     }) -> name('formulario');
@@ -108,3 +113,4 @@ Route::middleware(['auth','role:anivers'])->group(function () {
 });
 // Route::post("/forms/{festaid}", [ConvidadosController::class, 'display']) -> name('paraforms');
 Route::resource("/forms", ConvidadosController::class);
+Route::post('/formulario/{id}', [ConvidadosController::class, 'updateStatus'])->name('status.update');

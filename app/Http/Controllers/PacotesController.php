@@ -17,7 +17,7 @@ class PacotesController extends Controller
         
     }
 
-    public function index()
+    public function Index2()
     {
         $response['pacotes'] = $this->pacote->all();
         return view('admin.lista-comida.comida')->with($response);
