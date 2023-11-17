@@ -20,17 +20,17 @@ Crie um arquivo para as variáveis de ambiente através da CLI
 cp .env.generationfile .env
 ```
 
-Posicione as imagens dos pacotes bases através da CLI
-```sh
-cp -r imagens storage/app/public
-```
-
 Defina suas informações de login dentro do arquivo .env adicionando as informações nas linhas (após o "=")
 ```sh
 # Adicione o nome de usuário da sua base de dados
 DB_USERNAME=
 # Adicione a senha da sua base de dados
 DB_PASSWORD=
+```
+
+Posicione as imagens dos pacotes bases através da CLI
+```sh
+cp -r imagens storage/app/public
 ```
 
 Confira os emails e defina suas senhas para as contas primárias em /database/seeders/UserSeeder.php adicionando as informações na linhas (entre o "('')")
@@ -53,32 +53,32 @@ Suba os containers do projeto através da CLI
 docker compose up -d
 ```
 
-Acesse a CLI do container principal
+Acesse a CLI do container principal através da CLI
 ```sh
 docker compose exec app bash
 ```
 
-> Instale as dependências do projeto
+> Instale as dependências do projeto na CLI aberta
 > ```sh
 > composer install
 > ```
 > 
-> Gere a chave do seu projeto
+> Gere a chave do seu projeto na CLI aberta
 > ```sh
 > php artisan key:generate
 > ```
 >
-> Crie as tabelas no banco de dados
+> Crie as tabelas no banco de dados na CLI aberta
 > ```sh
 > php artisan migrate
 > ```
 >
-> Adicione os dados iniciais no banco de dados
+> Adicione os dados iniciais no banco de dados na CLI aberta
 > ```sh
 > php artisan db:seed
 > ```
 >
-> Faça a conexão do caminho das imagens 
+> Faça a conexão do caminho das imagens na CLI aberta
 > ```sh
 > php artisan storage:link
 > ```
