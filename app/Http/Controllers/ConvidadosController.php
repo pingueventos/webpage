@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Convidado;
+use App\Models\Solicitacao;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +41,7 @@ class ConvidadosController extends Controller
             'festa_id' => $request->idFesta,
             'user_id' => $request->idUsuario,
         ]);
+
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
     }
 
@@ -49,13 +51,33 @@ class ConvidadosController extends Controller
         $convidado = Convidado::find($id);
         $convidado->update(['status' => $novoStatus]);
 
+        if ($convidado->status == 1)
+        {
+            $festaId = $convidado->festa_id;
+            $solicitacao = Solicitacao::find($festaId);
+            $confirmados = $solicitacao->confirmados;
+            $confirmados++;
+            $solicitacao->update(['confirmados' => $confirmados]);
+        }
+
         return redirect()->back()->with('success', 'Status atualizado com sucesso.');
     }
 
     public function destroy(string $id)
     {
-        $convidado = $this->convidado->find($id);
-        $convidado->delete();
+        $convidado = Convidado::find($id);
+
+        if ($convidado->status == 1)
+        {
+            $festaId = $convidado->festa_id;
+            $solicitacao = Solicitacao::find($festaId);
+            $confirmados = $solicitacao->confirmados;
+            $confirmados--;
+            $solicitacao->update(['confirmados' => $confirmados]);
+        }
+
+        $convidado->delete();   
+
         return redirect()->back();
     }
 }

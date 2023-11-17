@@ -50,7 +50,7 @@
 
                             @if ($solicitacao->status === 0)
                             <td scope="col">
-                                <form action="{{ route('statusAprovado', ['id' => $solicitacao->id]) }}" method="post">
+                                <form action="{{ route('statusAprovadoAdmin', ['id' => $solicitacao->id]) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="novo_status" value="1">
                                 <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
@@ -87,6 +87,7 @@
 
 @if(auth()->id() == 3)
 <a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
+
 @else 
-<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
+
 @endif
