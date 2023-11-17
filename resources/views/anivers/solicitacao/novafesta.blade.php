@@ -17,6 +17,10 @@
                 <form method="POST" action="{{ route('novafesta.store') }}">
                     @csrf
                     <div class="row">
+                        <div class="col-md-5" align="center">
+                            <label>Nome Completo</label>
+                            <input name="nome" type="text" class="form-control">
+                        </div>
                         <div class="col-md-3" align="center">
                             <label>Num de Convidados</label>
                             <input name="numconvidados" type="number" class="form-control">

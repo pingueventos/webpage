@@ -52,20 +52,34 @@ class UserSeeder extends Seeder
 
         DB::table('solicitacoes')->insert([
             [
+                'nome' => 'Aniversariante 1',
                 'user_id' => $user_id,
                 'start' => 6,
                 'end' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
-                'pacotecomida' => 2,
+                'pacotecomida' => 'Economico',
+                'comida_pacote' => '<ul><li>bolinha de queijo</li><li>esfirra de carne</li><li>empada de frango</li><li>coxinha de frango</li><li>bolo de festa <i>(recheio de maracujá)</i></li></ul>',
+                'bebida_pacote' => '<ul><li>guaraná</li><li>coca cola</li><li>fanta laranja</li><li>sprite</li></ul>',
+                'imagem1_pacote' => 'imagens/6wNYpgLNAOp9ngnlKleC2167eiKp0T5nyelXNQhY.jpg',
+                'imagem2_pacote' => 'imagens/57vKTSO0UbbPQ4aWouPu2PwLucy6HPLiUc1SmV4I.jpg',
+                'imagem3_pacote' => 'imagens/bFZ9QSEiNWkJZiExbYZcsomyomArAaQj9C1weBTM.jpg',
+                'preco_pacote' => 30,
             ],
             [
+                'nome' => 'Aniversariante 2',
                 'user_id' => $user_id,
                 'start' => 6,
                 'end' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
-                'pacotecomida' => 2,
+                'pacotecomida' => 'Economico',
+                'comida_pacote' => '<ul><li>bolinha de queijo</li><li>esfirra de carne</li><li>empada de frango</li><li>coxinha de frango</li><li>bolo de festa <i>(recheio de maracujá)</i></li></ul>',
+                'bebida_pacote' => '<ul><li>guaraná</li><li>coca cola</li><li>fanta laranja</li><li>sprite</li></ul>',
+                'imagem1_pacote' => 'imagens/6wNYpgLNAOp9ngnlKleC2167eiKp0T5nyelXNQhY.jpg',
+                'imagem2_pacote' => 'imagens/57vKTSO0UbbPQ4aWouPu2PwLucy6HPLiUc1SmV4I.jpg',
+                'imagem3_pacote' => 'imagens/bFZ9QSEiNWkJZiExbYZcsomyomArAaQj9C1weBTM.jpg',
+                'preco_pacote' => 30,
             ],
         ]);
     }

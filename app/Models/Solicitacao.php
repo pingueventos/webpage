@@ -9,6 +9,7 @@ class Solicitacao extends Model
   protected $table = 'solicitacoes';
   protected $primaryKey = 'id';
   protected $fillable = [
+        'nome',
         'user_id',
         'start',
         'end',
@@ -21,8 +22,9 @@ class Solicitacao extends Model
         'imagem1_pacote',
         'imagem2_pacote',
         'imagem3_pacote',
+        'preco_pacote',
         'status',
-    ];
+      ];
     public function user():BelongsTo {
       return $this->belongsTo(User::class,'user_id');
     }

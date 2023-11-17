@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Convidado;
 use Illuminate\Http\RedirectResponse;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ConvidadosController extends Controller
 {
@@ -14,13 +14,7 @@ class ConvidadosController extends Controller
         $this->convidado = new Convidado();
 
     }
-
-    // public function display($festaid)
-    // {
-    //     $response['convidados'] = $this->convidado->all();
-    //     return view('anivers.forms.index')->with($response);
-    // }
-
+    
     public function show($festaid)
     {
         $response['convidados'] = $this->convidado->all();

@@ -90,7 +90,7 @@ Route::middleware(['auth','role:anivers'])->group(function () {
         return view('anivers.forms.formulario');
     }) -> name('formulario');
 
-    // Route::post('anivers/solicitacoes/{id}', [CancelarReservaAniversController::class, 'cancelar'])->name('cancelar');
+    Route::get('/editar-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteEdit'])->name('editar.pacote');
     Route::post('anivers/solicitacoes/{id}', [SolicitacaoController::class, 'cancelar'])->name('cancelar');
     Route::get('anivers/solicitacoes', [SolicitacaoController::class, 'manage'])->name('solicitacoes');
 

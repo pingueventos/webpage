@@ -4,8 +4,6 @@
 
 <br><h3 align="center">Aniversariante Dashboard</h2>
 
-    <a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
-
 <a href="{{ route('solicitacoes') }}">Reservas</a><br><br>
 
 <a href="{{ route('novafesta.index') }}">Solicitar festa</a><br>

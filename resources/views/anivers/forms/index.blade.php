@@ -2,6 +2,9 @@
 
 @section('content')
 
+@auth
+<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
+@endauth
     <div class="container">
 
         <h3 align="center" class="mt-5">Formulário de Convidados</h3>

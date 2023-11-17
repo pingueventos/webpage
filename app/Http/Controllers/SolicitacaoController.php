@@ -33,6 +33,7 @@ class SolicitacaoController extends Controller
         $imagem1 = $pacote->imagem1;
         $imagem2 = $pacote->imagem2;
         $imagem3 = $pacote->imagem3;
+        $precopacote = $pacote->preco;
 
         $userId = auth()->id();
     
@@ -48,6 +49,7 @@ class SolicitacaoController extends Controller
         ]);
 
         Solicitacao::create([
+            'nome' => $request->nome,
             'user_id' => $userId,
             'start' => $request->start,
             'end' => $request->end,
@@ -60,6 +62,7 @@ class SolicitacaoController extends Controller
             'imagem1_pacote' => $imagem1,
             'imagem2_pacote' => $imagem2,
             'imagem3_pacote' => $imagem3,
+            'preco_pacote' => $precopacote,
         ]);
         return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
     }
@@ -94,4 +97,35 @@ class SolicitacaoController extends Controller
         // $solicitacao->delete();
         // return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
     }
+
+    public function pacoteEdit($id)
+    {
+        $solicitacao = Solicitacao::find($id);
+        return view('anivers.reservas.editar-pacote')->with('solicitacao', $solicitacao);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+    $solicitacao = Solicitacao::find($id);
+    
+    $solicitacao->pacotecomida = $request->input('pacotecomida');    
+    $pacote = Pacotes::where('titulo', $solicitacao->pacotecomida)->first();
+
+    $solicitacao->id_pacote = $pacote->id;
+    $solicitacao->comida_pacote = $pacote->comidas;
+    $solicitacao->bebida_pacote = $pacote->bebidas;
+    $solicitacao->imagem1_pacote = $pacote->imagem1;
+    $solicitacao->imagem2_pacote = $pacote->imagem2;
+    $solicitacao->imagem3_pacote = $pacote->imagem3;
+    $solicitacao->preco_pacote = $pacote->preco;
+    // Não atualize o campo_nao_editavel, pois ele está no campo hidden
+
+    $solicitacao->save();
+
+    // Redirecione para a página de exibição dos dados atualizados
+    return redirect()->back()->with('success', 'Pacote alterado com sucesso.');
+
+    }
+
 }
