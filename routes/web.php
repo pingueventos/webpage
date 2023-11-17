@@ -32,9 +32,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
         return view('admin.agenda-buffet.agenda');
     }) -> name('agenda');
 
-    Route::get('admin/dashboard/pacotesdecomida', function(){
-        return view('admin.lista-comida.comida');
+    Route::resource("/admin/pacotescomida", PacotesController::class);
+
+    Route::get('admin/pacotesdecomida', function(){
+        return view('admin.lista-comida.pacotes-all');
     }) -> name('pacotes');
+
+    // Route::get('admin/dashboard/pacotesdecomida', function(){
+    //     return view('admin.lista-comida.comida');
+    // }) -> name('pacotes');
 
     Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
 
@@ -78,14 +84,17 @@ Route::middleware(['auth','role:anivers'])->group(function () {
         return view('anivers.reserva-aprovada.reservaconcluida');
     }) -> name('pesquisadesatisfacao');
 
+    Route::post('admin/formulario/{id}', [ConvidadosController::class, 'updateStatus'])->name('status.update');
+
     Route::get('/formulario', function(){
         return view('anivers.forms.formulario');
     }) -> name('formulario');
 
-    // Route::post('anivers/solicitacoes/{id}', [CancelarReservaAniversController::class, 'cancelar'])->name('cancelar');
+    Route::get('/editar-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteEdit'])->name('editar.pacote');
     Route::post('anivers/solicitacoes/{id}', [SolicitacaoController::class, 'cancelar'])->name('cancelar');
     Route::get('anivers/solicitacoes', [SolicitacaoController::class, 'manage'])->name('solicitacoes');
 
     Route::resource("/anivers/novafesta", SolicitacaoController::class);
 });
+// Route::post("/forms/{festaid}", [ConvidadosController::class, 'display']) -> name('paraforms');
 Route::resource("/forms", ConvidadosController::class);

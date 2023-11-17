@@ -1,9 +1,12 @@
-<h2>Admin Dashboard</h2>
+@extends('anivers.layouts.app')
+
+@section('content')
+<br><h4 align="center">Admin Dashboard</h4><br><br>
 
 <a href="{{ route('agenda') }}">Agenda</a><br><br>
-<a href="{{ route('aprovada') }}">Festas Aprovadas</a><br><br>
 <a href="{{ route('todasSolicitacoes') }}">Solicitacoes de Festa</a><br><br>
-{{-- <a href="{{ route('criarpacotes.index') }}">Adicionar Pacotes</a><br> --}}
+<a href="{{ route('pacotes') }}">Pacotes de Comida</a><br><br>
+<a href="{{ route('pacotescomida.index') }}">Adicionar Pacotes</a><br>
 <a href="{{ route('editarrecomendacoes') }}">Recomendoes Pré-Festa</a><br><br>
 <a href="{{ route('resultadopesquisa') }}">Resultados: Pesquisa de Satisfação</a><br><br>
 
@@ -15,3 +18,4 @@
     Logout</a>
 
 </form>
+@endsection

@@ -11,6 +11,9 @@ class Convidado extends Model
         'nome',
         'CPF',
         'idade',
+        'festa_id',
+        'user_id',
+        'status',
     ];
     use HasFactory;
 }

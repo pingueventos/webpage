@@ -1,5 +1,9 @@
+@extends('anivers.layouts.app')
+
+@section('content')
+
 <head>
-    @trixassets
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
 </head>
 <body>
 {{-- <h2>Pacote de Comidas</h2>
@@ -18,21 +22,56 @@
     <li>3 Imagens</li>
     <li>Preco</li>
 </ul> --}}
-
-<form action="{{ route('criarpacotes.store') }}" method="POST" enctype"multipart/form-data">
+<br><h3 align="center">Novo Pacote</h3>
+<form action="{{ route('pacotescomida.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-    <input name="titulo" type="text" placeholder="Título">
+    <label>Título</label><br>
+    <input name="titulo" type="text" placeholder=""><br><br>
 
-    @trix(\App\Http\Controllers\PacotesController::class, 'comidas')
+        <div>
+            <label for="comidas">Pacote Comida</label>
+            <textarea name="comidas" id="comidas" cols="30" rows="10"></textarea><br><br>
+        </div>
 
-    @trix(\App\Http\Controllers\PacotesController::class, 'bebidas')
-
-        {{-- <label>Pacote Comida</label>
-        <input name="pacotecomidas" type="text">
         <label>Pacote Bebidas</label>
-        <input name="pacotebebidas" type="text"> --}}
-    
+            <textarea name="bebidas" id="bebidas" cols="30" rows="10"></textarea><br><br>
+
+        <div class="mb-6">
+            <label for="">Imagem 1</label><br>
+                <input type="file" name="imagem1" >
+        </div>
+
+        <div class="mb-6">
+            <br><label for="">Imagem 2</label><br>
+                <input type="file" name="imagem2" >
+        </div>
+
+        <div class="mb-6">
+            <br><label for="">Imagem 3</label><br>
+                <input type="file" name="imagem3" >
+        </div>
+
+        <label>Preço em reais</label><br>
+        <input name="preco" type="number" placeholder=""><br><br>
+
+        <input type="submit" class="btn btn-primary" value="Adicionar">
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#comidas' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#bebidas' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+     
         {{-- <label for="image">Imagem 1</label>
         <input type="file" name="imagem1">
 
@@ -41,11 +80,12 @@
 
         <label for="image">Imagem 3</label>
         <input type="file" name="imagem3"> --}}
-
-        <input type="submit" class="btn btn-primary" value="Register">
 </form>
     </div>
 
 <a href="{{  route('admindashboard')  }}">Dashboard</a>
 
-</body>
+</body> 
+
+@endsection
+    
