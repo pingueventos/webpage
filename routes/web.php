@@ -57,6 +57,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     }) -> name('editarrecomendacoes');
 
     Route::post('/update-global', [AgendaController::class, 'updateGlobal'])->name('update.global');
+    Route::post('/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especifico');
 
 });
 

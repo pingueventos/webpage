@@ -24,7 +24,7 @@ class CalendarSeeder extends Seeder
                 ];
                 for ($hora = 0; $hora < 24; $hora++) {
                     $horario = str_pad($hora, 2, '0', STR_PAD_LEFT);
-                    $linhadefault['h' . $horario] = 'Indisp.';
+                    $linhadefault['h' . $horario] = 1;
                 }
 
                 DB::table('calendars')->insert([$linhadefault]);

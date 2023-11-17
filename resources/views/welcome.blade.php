@@ -16,12 +16,8 @@
         </style> --}}
     </head>
     <body class="antialiased">
-        {{-- puts --}}
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
 
-            {{--  --}}
-            {{-- Sarve --}}
-            {{--  --}}
             <div>
                 <h1>Agenda</h1>
 
@@ -71,15 +67,11 @@
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
                     <img src=https://png.pngtree.com/png-clipart/20201208/original/pngtree-cute-penguin-kawaii-birthday-party-hat-fun-png-image_5570669.jpg" alt="">
-                    {{-- AOBA --}}
                 </div>
-                {{-- eitra3 --}}
             </div>
-            {{-- Eita2 --}}
         </div>
 
         <div>
-            {{-- <h2>EITA</h2> --}}
         </div>
 
     </body>
@@ -113,7 +105,11 @@
 
             for (let hora = 0; hora < 24; hora++) {
                 const horario = `h${hora.toString().padStart(2, '0')}`;
-                row.innerHTML += `<td>${dia[horario]}</td>`;
+                // row.innerHTML += `<td>${dia[horario]}</td>`;
+                if(dia[horario] == 0)
+                    row.innetHTML += 'Livre';
+                else
+                    row.innetHTML += 'Indisp.';
             }
             tbody.appendChild(row);
         });

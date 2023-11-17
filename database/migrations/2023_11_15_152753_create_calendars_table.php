@@ -18,7 +18,7 @@ return new class extends Migration
 
             for ($hora = 0; $hora < 24; $hora++) {
                 $horario = str_pad($hora, 2, '0', STR_PAD_LEFT);
-                $table->string('h' . $horario)->default('Indisp.');
+                $table->integer('h' . $horario)->default(0);
             }
 
             $table->timestamps();
