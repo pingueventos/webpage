@@ -40,6 +40,7 @@ class ConvidadosController extends Controller
             'idade' => $request->idade,
             'festa_id' => $request->idFesta,
             'user_id' => $request->idUsuario,
+            'status' => $request->status,
         ]);
 
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');

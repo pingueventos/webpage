@@ -8,7 +8,11 @@
 <body>
 
 <br><h3 align="center">Editar Pacote</h3>
-<form action="{{ route('pacotescomida.update', $pacote->id) }}" method="POST" enctype="multipart/form-data">
+@if (auth()->id()==3)
+    <form action="{{ route('pacotesupdateAdmin.index', $pacote->id) }}" method="POST" enctype="multipart/form-data">
+@else
+    <form action="{{ route('pacotesupdateComerc.index', $pacote->id) }}" method="POST" enctype="multipart/form-data">
+@endif
     @csrf
     @method('PUT')
     <div class="form-group">

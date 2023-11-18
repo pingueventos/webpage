@@ -21,9 +21,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 # Descomente as quatro linhas abaixo
+    if (!(DB::table('solicitacoes')==null))
+    {
        $solicitacao=DB::table('solicitacoes')->get();
        View::share('solicitacoes', $solicitacao);
-       $pacote=DB::table('pacotes')->get();
-       View::share('pacotes', $pacote);
+    }
+    if (!(DB::table('pacotes')==null))
+    {
+        $pacote=DB::table('pacotes')->get();
+        View::share('pacotes', $pacote);
+    }
     }
 }

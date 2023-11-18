@@ -32,8 +32,12 @@ Route::middleware(['auth','role:admin'])->group(function () {
         return view('admin.agenda-buffet.agenda');
     }) -> name('agenda');
 
-    Route::resource("/admin/pacotescomida", PacotesController::class);
-
+    // Route::resource("/admin/pacotescomida", PacotesController::class);
+    Route::post("/admin/pacotescomida", [PacotesController::class, 'pacotesStore'])->name('pacotescomidaAdmin.store');   
+    Route::get("/admin/pacotescomida", [PacotesController::class, 'pacotesIndex'])->name('pacotescomidaAdmin.index');
+    Route::put("/admin/pacotescomida/{pacotescomida}", [PacotesController::class, 'pacotesUpdate'])->name('pacotesupdateAdmin.index');
+    Route::delete("/admin/pacotescomida/{pacotescomida}", [PacotesController::class, 'pacotesDestroy'])->name('pacotesAdmin.delete');
+    Route::get("/admin/pacotescomida/{pacotescomida}/edit", [PacotesController::class, 'pacotesEdit'])->name('pacoteseditAdmin.index');
     Route::get('admin/pacotesdecomida', function(){
         return view('admin.lista-comida.pacotes-all');
     }) -> name('pacotesAdmin');
@@ -42,7 +46,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     //     return view('admin.lista-comida.comida');
     // }) -> name('pacotes');
 
-    Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovadoAdmin');
+    Route::post('admin/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusFesta'])->name('statusAdmin');
 
     Route::get('admin/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoesAdm');
     
@@ -62,15 +66,21 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 Route::middleware(['auth','role:comerc'])->group(function () {
     Route::get('comerc/dashboard', [ComercController::class, 'dashboard']) -> name('comercdashboard');
+
     Route::resource("/comerc/pacotescomida", PacotesController::class);
+    Route::post("/comerc/pacotescomida", [PacotesController::class, 'pacotesStore'])->name('pacotescomidaComerc.store');   
+    Route::get("/comerc/pacotescomida", [PacotesController::class, 'pacotesIndex'])->name('pacotescomidaComerc.index');
+    Route::get("/comerc/pacotescomida/{pacotescomida}/edit", [PacotesController::class, 'pacotesEdit'])->name('pacoteseditComerc.index');
+    Route::put("/comerc/pacotescomida/{pacotescomida}", [PacotesController::class, 'pacotesUpdate'])->name('pacotesupdateComerc.index');
+    Route::delete("/comerc/pacotescomida/{pacotescomida}", [PacotesController::class, 'pacotesDestroy'])->name('pacotesComerc.delete');
 
     Route::get('comerc/pacotesdecomida', function(){
         return view('admin.lista-comida.pacotes-all');
-    }) -> name('pacotes');
+    }) -> name('pacotesComerc');
 
-    Route::post('comerc/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusAprovado'])->name('statusAprovado');
+    Route::post('comerc/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusFesta'])->name('statusComerc');
 
-    Route::get('comerc/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoes');
+    Route::get('comerc/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoesComerc');
 
 });
 

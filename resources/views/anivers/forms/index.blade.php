@@ -43,6 +43,11 @@
                         </div>
                     </div>
 
+                    @if (auth()->id() == 1)
+                        <input type="hidden" name="status" value=1>
+                    @else
+                        <input type="hidden" name="status" value=0>
+                    @endif
                     <input type="hidden" name="idFesta" value="{{  $festaId  }}">
                     <input type="hidden" name="idUsuario" value="{{  $usuarioId  }}">
 
@@ -66,7 +71,6 @@
             @endphp
 
             @auth
-
                 <table class="table mt-5">
                     <thead>
                       <tr>
@@ -83,13 +87,15 @@
                     @endif
                       </tr>
                     </thead>
-                    <tbody>
-        
+
+      
                         @php
                             $contador=0;
                         @endphp
+                        <tbody>
                         @foreach ( $convidados as $convidado )
-                            @if (auth()->id() == 1 || $convidado->festa_id == $festaId)
+                            @if((auth()->id()!=1 && $convidado->festa_id == $festaId && $authId == auth()->id()) || (auth()->id()==1 && $convidado->festa_id == $festaId))
+                                @if (($convidado->status!=0 && auth()->id() == 1) || (auth()->id() != 1))
                                 <tr>
                                     <td scope="col">{{ ++$contador }}</td>
                                     <td scope="col">{{ $convidado->nome }}</td>
@@ -145,14 +151,12 @@
                                     @endif
                                 </tr>
                             @endif
-                        @endforeach
-                    </tbody>
-                </table>
-      
-
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
 
             @endauth
-
             </div>
         </div>
     </div>

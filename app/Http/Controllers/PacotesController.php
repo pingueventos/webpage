@@ -17,13 +17,13 @@ class PacotesController extends Controller
         
     }
 
-    public function Index2()
+    public function pacotesIndex()
     {
         $response['pacotes'] = $this->pacote->all();
         return view('admin.lista-comida.comida')->with($response);
     }
     
-    public function store(Request $request)
+    public function pacotesStore(Request $request)
     {     
         Pacotes::create([
             'titulo' => $request->titulo,
@@ -37,20 +37,55 @@ class PacotesController extends Controller
         return redirect()->back()->with('success','Pacote adicionado com sucesso!');
     }
 
-    public function edit(string $id)
+    public function pacotesEdit(string $id)
     {
         $pacote = Pacotes::findOrFail($id);
         return view('admin.lista-comida.editarpacote',compact('pacote'));
     }
 
-    public function update(Request $request, string $id)
+    public function pacotesUpdate(Request $request, string $id)
     {
-        $pacote = Pacotes::findOrFail($id);
-        $pacote->update($request->all());
-        return redirect()->route('pacotes', ['success' => 'Pacote atualizado com sucesso!']);
+        $pacote = Pacotes::find($id);
+        // $vetIndice = ['titulo','comidas','bebidas','imagem1','imagem2','imagem3','preco'];
+        // for ($i=0; $i<7; $i++)
+        // {
+        //     $indiceAtual = value($vetIndice[$i]);
+        //     if($request->$indiceAtual)
+        //         $vetUpdate[$vetIndice[$i]] = $request->indiceAtual;
+        // }
+        // dd($vetUpdate);
+
+            if($request->imagem1)
+                $imagem1 = $request->imagem1->store('imagens');
+            else
+                $imagem1 = $pacote->imagem1;
+
+            if($request->imagem2)
+                $imagem2 = $request->imagem2->store('imagens');
+            else
+                $imagem2 = $pacote->imagem2;
+
+            if($request->imagem3)
+                $imagem3 = $request->imagem3->store('imagens');
+            else
+                $imagem3 = $pacote->imagem3;
+    
+        $pacote->update([
+            'titulo' => $request->titulo,
+            'comidas' => $request->comidas,
+            'bebidas' => $request->bebidas,
+            'imagem1' => $imagem1,
+            'imagem2' => $imagem2,
+            'imagem3' => $imagem3,
+            'preco' => $request->preco,
+        ]);
+        if(auth()->id()==3)
+            return redirect()->route('pacotesAdmin', ['success' => 'Pacote atualizado com sucesso!']);
+        else
+            return redirect()->route('pacotesComerc', ['success' => 'Pacote atualizado com sucesso!']);
     }
 
-    public function destroy(string $id)
+    public function pacotesDestroy(string $id)
     {
         $pacote = $this->pacote->find($id);
         $pacote->delete();
