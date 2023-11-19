@@ -83,6 +83,14 @@ docker compose exec app bash
 > php artisan storage:link
 > ```
 
+Descomente as linhas a seguir do arquivo /app/Providers/AppServiceProvider.php (apague as '//')
+```sh
+# Descomente as linhas abaixo        
+//        $solicitacao=DB::table('solicitacoes')->get();
+//        View::share('solicitacoes', $solicitacao);
+//        $pacote=DB::table('pacotes')->get();
+//        View::share('pacotes', $pacote);
+```
 
 Acesse o projeto acessando o link abaixo em algum web browser<br>
 [http://localhost:1606](http://localhost:1606)

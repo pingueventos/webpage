@@ -10,11 +10,14 @@ use App\Http\Controllers\CancelarReservaAniversController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SolicitacaoController;
 use App\Http\Controllers\SolicitacaoAdminController;
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\paginapublica\InicialController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [InicialController::class, 'display'])->name('inicial.display');
 
 
 Route::middleware('auth')->group(function () {
@@ -28,9 +31,10 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard']) -> name('admindashboard');
     
-    Route::get('admin/dashboard/agenda', function(){
-        return view('admin.agenda-buffet.agenda');
-    }) -> name('agenda');
+    // Route::get('admin/dashboard/agenda', function(){
+    //     return view('admin.agenda-buffet.agenda');
+    // }) -> name('agenda');
+    Route::get('/admin/dashboard/agenda', [AgendaController::class, 'passaDia'])->name('agenda');
 
     // Route::resource("/admin/pacotescomida", PacotesController::class);
     Route::post("/admin/pacotescomida", [PacotesController::class, 'pacotesStore'])->name('pacotescomidaAdmin.store');   
@@ -61,6 +65,9 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('admin/dashboard/editar_recomendacoes', function(){
         return view('admin.recomendacoes.recomprefesta');
     }) -> name('editarrecomendacoes');
+
+    Route::post('/update-global', [AgendaController::class, 'updateGlobal'])->name('update.global');
+    Route::post('/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especifico');
 });
 
 

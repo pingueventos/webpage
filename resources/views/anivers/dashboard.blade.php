@@ -2,7 +2,7 @@
 
 @section('content')
 
-<br><h3 align="center">Aniversariante Dashboard</h2>
+<br><h3 align="center">Aniversariante Dashboard</h3>
 
 <a href="{{ route('solicitacoes') }}">Reservas</a><br><br>
 

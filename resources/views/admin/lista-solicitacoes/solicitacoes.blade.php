@@ -21,7 +21,7 @@
                     <th scope="col">Número de Convidados</th>
                     <th scope="col">Idade Comemorada</th>
                     <th scope="col">Início da Festa</th>
-                    <th scope="col">Término da Festa</th>
+                    <th scope="col">Fim da Festa</th>
                     <th scope="col">Pacote de comidas</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
@@ -37,9 +37,10 @@
                         <td scope="col">{{ ++$key }}</td>
                         <td scope="col">{{ $solicitacao->nome}}</td>
                         <td scope="col">{{ $solicitacao->numconvidados}}</td>
+                        <td scope="col">{{ $solicitacao->data}}</td>
                         <td scope="col">{{ $solicitacao->idade }}</td>
-                        <td scope="col">{{ $solicitacao->start }}</td>
-                        <td scope="col">{{ $solicitacao->end }}</td>
+                        <td scope="col">{{ $solicitacao->inicio + 1 }}</td>
+                        <td scope="col">{{ $solicitacao->fim - 1 }}</td>
                         <td scope="col">{{ $solicitacao->pacotecomida }}</td>
                         <td scope="col">
                             @if ($solicitacao->status === 0)

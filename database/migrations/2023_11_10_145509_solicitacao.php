@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('nome')->nullable();
-            $table->integer('start');
-            $table->integer('end');
+            $table->date('data');
+            $table->integer('inicio');
+            $table->integer('fim');
             $table->integer('numconvidados');
             $table->integer('confirmados')->default(0);
             $table->integer('presentes')->default(0);
