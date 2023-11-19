@@ -1,6 +1,12 @@
 @extends('anivers.layouts.app')
 
 @section('content')
+@if(auth()->id() == 3)
+<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
+
+@else 
+<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
+@endif
 
     <div class="container">
 
@@ -50,22 +56,34 @@
 
                             @if ($solicitacao->status === 0)
                             <td scope="col">
-                                <form action="{{ route('statusAprovadoAdmin', ['id' => $solicitacao->id]) }}" method="post">
+                                @if(auth()->id()==3)
+                                    <form action="{{ route('statusAdmin', ['id' => $solicitacao->id]) }}" method="post">
+                                @else
+                                    <form action="{{ route('statusComerc', ['id' => $solicitacao->id]) }}" method="post">
+                                @endif
                                 @csrf
                                 <input type="hidden" name="novo_status" value="1">
                                 <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
                             </form>
                             </td>
                             <td scope="col">   
-                            <form action="{{ route('statusAprovado', ['id' => $solicitacao->id]) }}" method="post">
-                            @csrf            
+                                @if(auth()->id()==3)
+                                    <form action="{{ route('statusAdmin', ['id' => $solicitacao->id]) }}" method="post">
+                                @else
+                                    <form action="{{ route('statusComerc', ['id' => $solicitacao->id]) }}" method="post">
+                                @endif
+                                @csrf            
                                 <input type="hidden" name="novo_status" value="2">
                                 <button type="submit" class="btn btn-danger btn-sm">Negar</button>
                             </td>
                             </form>
                             
                             @elseif ($solicitacao->status === 1)
-                            <form action="{{ route('statusAprovado', ['id' => $solicitacao->id]) }}" method="post">
+                                @if(auth()->id()==3)
+                                    <form action="{{ route('statusAdmin', ['id' => $solicitacao->id]) }}" method="post">
+                                @else
+                                    <form action="{{ route('statusComerc', ['id' => $solicitacao->id]) }}" method="post">
+                                @endif
                                 @csrf
                                 <td scope="col">            
                                     <input type="hidden" name="novo_status" value="3">
@@ -84,10 +102,3 @@
             </table>
     </div>
 @endsection
-
-@if(auth()->id() == 3)
-<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
-
-@else 
-
-@endif

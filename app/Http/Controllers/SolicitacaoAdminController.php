@@ -16,7 +16,7 @@ class SolicitacaoAdminController extends Controller
         return view('admin.lista-solicitacoes.solicitacoes');
     }
 
-    public function statusAprovado(string $id)
+    public function statusFesta(string $id)
     {
         $novoStatus = request()->input('novo_status');
         $solicitacao = Solicitacao::find($id);

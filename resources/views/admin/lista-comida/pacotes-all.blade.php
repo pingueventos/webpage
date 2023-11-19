@@ -1,8 +1,19 @@
 @extends('anivers.layouts.app')
 
-@section('content')
+@section('content')@if(auth()->id() == 3)
+<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
+@else 
+<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
+@endif
+
     <div class="container text-center">
         <h3 align="center" class="mt-5">Pacotes Comida</h3>
+        <br>
+        @if (auth()->id()==3)
+            <a href="{{ route('pacotescomidaAdmin.index') }}">Adicionar Pacotes</a><br>
+        @else
+            <a href="{{ route('pacotescomidaComerc.index') }}">Adicionar Pacotes</a><br>
+        @endif
 
         @if (isset($success))
             <div class="alert alert-success">
@@ -49,7 +60,9 @@
                         <td scope="col">{{ $pacote->preco . " reais"}}</td>
 
                         <td scope="col">
-                            <a href="{{  route('pacotescomida.edit', $pacote->id) }}">
+                            @if (auth()->id() == 3)<a href="{{  route('pacoteseditAdmin.index', $pacote->id) }}">
+                            @else <a href="{{  route('pacoteseditComerc.index', $pacote->id) }}">
+                            @endif
                             <button class="btn btn-primary btn-sm">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
                             </button>
@@ -57,8 +70,9 @@
                         </td>
 
                         <td scope="col">
-                            <form action="{{ route('pacotescomida.destroy', $pacote->id) }}" method="POST" style ="display:inline">
-                            @csrf
+                            @if (auth()->id() == 3)<form action="{{ route('pacotesAdmin.delete', $pacote->id) }}" method="POST" style ="display:inline">
+                            @else <form action="{{ route('pacotesComerc.delete', $pacote->id) }}" method="POST" style ="display:inline"> @csrf
+                           @endif
                            @method('DELETE')
                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
                             </form>
@@ -70,11 +84,6 @@
     </div>
 
 
-@if(auth()->id() == 3)
-<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
-@else 
-<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
-@endif
 
 
 @endsection

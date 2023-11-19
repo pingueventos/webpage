@@ -23,7 +23,11 @@
     <li>Preco</li>
 </ul> --}}
 <br><h3 align="center">Novo Pacote</h3>
-<form action="{{ route('pacotescomida.store') }}" method="POST" enctype="multipart/form-data">
+@if (auth()->id()==3)
+    <form action="{{ route('pacotescomidaAdmin.store') }}" method="POST" enctype="multipart/form-data">
+@else
+    <form action="{{ route('pacotescomidaComerc.store') }}" method="POST" enctype="multipart/form-data">
+@endif
     @csrf
     <div class="form-group">
     <label>Título</label><br>
