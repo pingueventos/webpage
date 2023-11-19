@@ -25,6 +25,7 @@ class Solicitacao extends Model
         'preco_pacote',
         'status',
         'confirmados',
+        'presentes',
       ];
     public function user():BelongsTo {
       return $this->belongsTo(User::class,'user_id');

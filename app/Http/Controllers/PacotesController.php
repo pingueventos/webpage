@@ -37,7 +37,7 @@ class PacotesController extends Controller
         return redirect()->back()->with('success','Pacote adicionado com sucesso!');
     }
 
-    public function pacotesEdit(string $id)
+        public function pacotesEdit(string $id)
     {
         $pacote = Pacotes::findOrFail($id);
         return view('admin.lista-comida.editarpacote',compact('pacote'));

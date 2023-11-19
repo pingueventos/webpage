@@ -25,6 +25,7 @@ class ConvidadosController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'nome' => ['required', 'string', 'max:100'],
             'CPF' => ['required', 'integer', 'unique:'.Convidado::class],
@@ -34,7 +35,7 @@ class ConvidadosController extends Controller
 
         ]);
 
-        Convidado::create([
+        $convidado = Convidado::create([
             'nome' => $request->nome,
             'CPF' => $request->CPF,
             'idade' => $request->idade,
@@ -42,6 +43,15 @@ class ConvidadosController extends Controller
             'user_id' => $request->idUsuario,
             'status' => $request->status,
         ]);
+
+        if(auth()->id()==1)
+        {
+            $festaId = $convidado->festa_id;
+            $solicitacao = Solicitacao::find($festaId);
+            $confirmados = $solicitacao->confirmados;
+            $confirmados++;
+            $solicitacao->update(['confirmados' => $confirmados]);
+        }
 
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
     }
@@ -52,7 +62,16 @@ class ConvidadosController extends Controller
         $convidado = Convidado::find($id);
         $convidado->update(['status' => $novoStatus]);
 
-        if ($convidado->status == 1)
+        if ($novoStatus==2)
+        {
+            $festaId = $convidado->festa_id;
+            $solicitacao = Solicitacao::find($festaId);
+            $presentes = $solicitacao->presentes;
+            $presentes++;
+            $solicitacao->update(['presentes' => $presentes]);
+        }
+
+        if ($convidado->status == 1) 
         {
             $festaId = $convidado->festa_id;
             $solicitacao = Solicitacao::find($festaId);
@@ -68,15 +87,20 @@ class ConvidadosController extends Controller
     {
         $convidado = Convidado::find($id);
 
-        if ($convidado->status == 1)
+        if ($convidado->status == 1 || $convidado->status==2)
         {
             $festaId = $convidado->festa_id;
             $solicitacao = Solicitacao::find($festaId);
             $confirmados = $solicitacao->confirmados;
             $confirmados--;
             $solicitacao->update(['confirmados' => $confirmados]);
+            if ($convidado->status==2)
+            {
+                $presentes = $solicitacao->presentes;
+                $presentes--;
+                $solicitacao->update(['presentes' => $presentes]);
+            }
         }
-
         $convidado->delete();   
 
         return redirect()->back();
