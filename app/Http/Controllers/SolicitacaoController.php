@@ -5,47 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Solicitacao;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Calendar;
 
 class SolicitacaoController extends Controller
 {
     protected $solicitacao;
     public function __construct(){
         $this->solicitacao = new Solicitacao();
-        
+
     }
 
-    public function index()
+    public function index(Calendar $calendario)
     {
         $response['solicitacoes'] = $this->solicitacao->all();
-        return view('anivers.solicitacao.novafesta')->with($response);
+        $dias = $calendario::all();
+        $start = count($dias) - (now()->diffInDays(Calendar::latest('dia')->first()->dia)) + 1;
+        return view('anivers.solicitacao.novafesta', ['agenda' => $dias, 'start' => $start])->with($response);
     }
-    
+
     public function store(Request $request)
     {
-        $request->validate([
-            'start' => ['required', 'integer'],
-            'end' => ['required', 'integer'],
-            'idade' => ['required', 'integer'],
-        ],[
-            'idade.required' => 'Campo obrigatório'
 
-        ]);
         $userId = auth()->id();
 
         Solicitacao::create([
             'user_id' => $userId,
-            'start' => $request->start,
-            'end' => $request->end,
+            'nome' => $request->nome,
+            'data' => $request->data,
+            'inicio' => $request->inicio,
+            'fim' => $request->fim,
             'numconvidados' => $request->numconvidados,
             'idade' => $request->idade,
             'pacotecomida' => $request->pacotecomida,
         ]);
         return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
+        // return view('welcome');
+        // return redirect()->route('inicial.display')->with('success', 'Solicitação realizada com sucesso!');
+
     }
 
     public function destroy(string $id)
     {
-        
+
         // $solicitacao = $this->solicitacao->find($id);
         // $solicitacao->delete();
         // return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');

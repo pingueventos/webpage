@@ -21,7 +21,7 @@
             <div>
                 <h1>Agenda</h1>
 
-                <table>
+                <table cellspacing="8" cellpadding="8">
                     <caption>Disponibilidade de Serviços</caption>
                     <thead>
                         <th>Data</th>
@@ -107,9 +107,10 @@
                 const horario = `h${hora.toString().padStart(2, '0')}`;
                 // row.innerHTML += `<td>${dia[horario]}</td>`;
                 if(dia[horario] == 0)
-                    row.innetHTML += 'Livre';
+                    row.innerHTML += `<td>&#x2714</td>`;
                 else
-                    row.innetHTML += 'Indisp.';
+                    row.innerHTML += `<td>&#x274C</td>`;
+
             }
             tbody.appendChild(row);
         });

@@ -11,8 +11,10 @@ class AgendaController extends Controller
     public function passaDia()
     {
         $dias = Calendar::pluck('dia');
+        $semanaPadrao = DB::table('calendars')->take(7)->get();
         return view('admin/agenda-buffet/agenda', [
-            'dias' => $dias
+            'dias' => $dias,
+            'semanapadrao' => $semanaPadrao,
         ]);
     }
 
@@ -44,5 +46,13 @@ class AgendaController extends Controller
         }
 
         return redirect()->route('admindashboard')->with('success', 'Valores atualizados com sucesso.');
+    }
+
+    public function horariosSolicitacao(Calendar $calendario)
+    {
+        $dias = $calendario::all();
+        return view('anivers/solicitacao/novafesta', [
+            'agenda' => $dias,
+        ]);
     }
 }

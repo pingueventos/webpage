@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('solicitacoes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->integer('start');
-            $table->integer('end');
+            $table->date('data');
+            $table->integer('inicio');
+            $table->integer('fim');
             $table->integer('numconvidados');
+            $table->string('nome');
             $table->integer('idade');
             $table->integer('pacotecomida');
             $table->integer('status')->default(0);

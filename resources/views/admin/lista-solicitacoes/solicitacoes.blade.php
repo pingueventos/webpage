@@ -14,7 +14,7 @@
                     <th scope="col">Número de Convidados</th>
                     <th scope="col">Idade Comemorada</th>
                     <th scope="col">Início da Festa</th>
-                    <th scope="col">Término da Festa</th>
+                    <th scope="col">Fim da Festa</th>
                     <th scope="col">Pacote de comidas</th>
                     <th scope="col">Status</th>
                     <th scope="col">Ação</th>
@@ -25,13 +25,13 @@
                 <tbody>
 
                     @foreach ( $solicitacoes as $key => $solicitacao )
-                    <tr> 
+                    <tr>
                     {{-- @if ($solicitacao->id === Auth::user(id)) --}}
                         <td scope="col">{{ ++$key }}</td>
                         <td scope="col">{{ $solicitacao->numconvidados}}</td>
                         <td scope="col">{{ $solicitacao->idade }}</td>
-                        <td scope="col">{{ $solicitacao->start }}</td>
-                        <td scope="col">{{ $solicitacao->end }}</td>
+                        <td scope="col">{{ $solicitacao->inicio + 1 }}</td>
+                        <td scope="col">{{ $solicitacao->fim - 1 }}</td>
                         <td scope="col">{{ $solicitacao->pacotecomida }}</td>
                         <td scope="col">
                             @if ($solicitacao->status === 0)
@@ -54,18 +54,18 @@
                                 <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
                             </form>
                             </td>
-                            <td scope="col">   
+                            <td scope="col">
                             <form action="{{ route('statusAprovado', ['id' => $solicitacao->id]) }}" method="post">
-                            @csrf            
+                            @csrf
                                 <input type="hidden" name="novo_status" value="2">
                                 <button type="submit" class="btn btn-danger btn-sm">Negar</button>
                             </td>
                             </form>
-                            
+
                             @elseif ($solicitacao->status === 1)
                             <form action="{{ route('statusAprovado', ['id' => $solicitacao->id]) }}" method="post">
                                 @csrf
-                                <td scope="col">            
+                                <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
                                     <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>

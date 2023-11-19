@@ -52,17 +52,21 @@ class UserSeeder extends Seeder
 
         DB::table('solicitacoes')->insert([
             [
+                'nome' => 'teste01',
+                'data' => '2023-11-26',
                 'user_id' => $user_id,
-                'start' => 6,
-                'end' => 10,
+                'inicio' => 6,
+                'fim' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
                 'pacotecomida' => 2,
             ],
             [
+                'nome' => 'testando02',
+                'data' => '2023-11-29',
                 'user_id' => $user_id,
-                'start' => 6,
-                'end' => 10,
+                'inicio' => 6,
+                'fim' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
                 'pacotecomida' => 2,

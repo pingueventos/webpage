@@ -102,4 +102,39 @@
             <button type="submit">Atualizar Especificamente</button>
     </form>
 <br>
+
 <a href="{{  route('admindashboard')  }}">Dashboard</a>
+<br><br>
+
+<table>
+    <caption>Padrão Semanal</caption>
+    <thead>
+        <th>Data</th>
+        <th>Dia da semana</th>
+        @for($hora=0; $hora<24; $hora++)
+            @php
+                $horario=str_pad($hora, 2, '0', STR_PAD_LEFT)
+            @endphp
+            <th>{{ $horario }}h</th>
+        @endfor
+    </thead>
+    <tbody id="agendaBody">
+        @foreach($semanapadrao as $diapadrao)
+        <tr>
+            <td>{{ $diapadrao->dia }}</td>
+            <td>{{ $diapadrao->diadasemana }}</td>
+            @for($hora = 0; $hora < 24; $hora++)
+                @php
+                    $horario = 'h' . str_pad($hora, 2, '0', STR_PAD_LEFT);
+                    if($diapadrao->$horario == 0)
+                        $valor = 'Livre.';
+                    else
+                        $valor = 'Indisp.';
+                @endphp
+                <td>{{ $valor }}</td>
+            @endfor
+        </tr>
+    @endforeach
+    </tbody>
+</table>
+

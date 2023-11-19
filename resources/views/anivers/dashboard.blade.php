@@ -2,7 +2,7 @@
 
 @section('content')
 
-<br><h3 align="center">Aniversariante Dashboard</h2>
+<br><h3 align="center">Aniversariante Dashboard</h3>
 
 {{-- <h5>Status das reservas: </h3> --}}
 
