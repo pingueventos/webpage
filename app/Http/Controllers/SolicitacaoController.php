@@ -7,6 +7,8 @@ use App\Models\Solicitacao;
 use App\Models\Pacotes;
 use App\Models\Convidado;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Calendar;
+
 
 class SolicitacaoController extends Controller
 {
@@ -16,10 +18,12 @@ class SolicitacaoController extends Controller
 
     }
 
-    public function index()
+    public function index(Calendar $calendario)
     {
         $response['solicitacoes'] = $this->solicitacao->all();
-        return view('anivers.solicitacao.novafesta')->with($response);
+        $dias = $calendario::all();
+        $start = count($dias) - (now()->diffInDays(Calendar::latest('dia')->first()->dia)) + 1;
+        return view('anivers.solicitacao.novafesta', ['agenda' => $dias, 'start' => $start])->with($response);
     }
 
     public function store(Request $request)
@@ -40,20 +44,13 @@ class SolicitacaoController extends Controller
 
         $request->merge(['id_pacote' => $idDoPacote]);
 
-        $request->validate([
-            'start' => ['required', 'integer'],
-            'end' => ['required', 'integer'],
-            'idade' => ['required', 'integer'],
-        ],[
-            'idade.required' => 'Campo obrigatório'
-
-        ]);
 
         Solicitacao::create([
             'nome' => $request->nome,
             'user_id' => $userId,
-            'start' => $request->start,
-            'end' => $request->end,
+            'data' => $request->data,
+            'inicio' => ($request->inicio - 1),
+            'fim' => ($request->fim + 2),
             'numconvidados' => $request->numconvidados,
             'idade' => $request->idade,
             'pacotecomida' => $request->pacotecomida,
@@ -77,7 +74,6 @@ class SolicitacaoController extends Controller
 
     public function destroy(string $id)
     {
-
         // $solicitacao = $this->solicitacao->find($id);
         // $solicitacao->delete();
         // return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');

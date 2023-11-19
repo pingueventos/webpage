@@ -10,9 +10,10 @@ class Solicitacao extends Model
   protected $primaryKey = 'id';
   protected $fillable = [
         'nome',
+        'data',
         'user_id',
-        'start',
-        'end',
+        'inicio',
+        'fim',
         'numconvidados',
         'idade',
         'pacotecomida',

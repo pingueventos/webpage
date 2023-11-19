@@ -54,8 +54,9 @@ class UserSeeder extends Seeder
             [
                 'nome' => 'Aniversariante 1',
                 'user_id' => $user_id,
-                'start' => 6,
-                'end' => 10,
+                'data' => '2023-11-26',
+                'inicio' => 6,
+                'fim' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
                 'pacotecomida' => 'Economico',
@@ -69,8 +70,9 @@ class UserSeeder extends Seeder
             [
                 'nome' => 'Aniversariante 2',
                 'user_id' => $user_id,
-                'start' => 6,
-                'end' => 10,
+                'data' => '2023-11-29',
+                'inicio' => 6,
+                'fim' => 10,
                 'numconvidados' => 100,
                 'idade' => 12,
                 'pacotecomida' => 'Economico',
