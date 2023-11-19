@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('end');
             $table->integer('numconvidados');
             $table->integer('confirmados')->default(0);
+            $table->integer('presentes')->default(0);
             $table->integer('idade');
             $table->integer('id_pacote')->nullable();
             $table->string('pacotecomida')->nullable();

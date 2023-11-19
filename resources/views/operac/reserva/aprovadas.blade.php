@@ -15,7 +15,7 @@
                         <th scope="col">Início da Festa</th>
                         <th scope="col">Término da Festa</th>
                         <th scope="col">Pacote de comidas</th>
-                        <th scope="col">Aprovados</th>
+                        <th scope="col">Confirmados</th>
                         <th scope="col">Ação</th>
                     </tr>
                 </thead>
@@ -33,7 +33,7 @@
                                 <td scope="col">{{ $solicitacao->end }}</td>
                                 <td scope="col">{{ $solicitacao->pacotecomida }}</td>
                                 <td scope="col">{{ $solicitacao->confirmados }}</td>
-                                <td><a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">Formulario de presenca</a></td>
+                                <td><a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">Lista de presenca</a></td>
                             @endif
                         </tr>
                     @endforeach

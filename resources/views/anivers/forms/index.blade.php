@@ -10,6 +10,20 @@
     @endif
 @endauth
 
+@php
+    $authId = DB::table('convidados')->where('festa_id',$festaId)->value('user_id');
+    $confirmados = DB::table('solicitacoes')->where('id',$festaId)->value('confirmados');
+    $presentes = DB::table('solicitacoes')->where('id',$festaId)->value('presentes');
+@endphp
+    
+@if (auth()->id()==1)
+    <p> 
+        <div id="ElementoFixo" class="bg-secondary text-white p-3 rounded">
+            Confirmados:<b> {{$confirmados}}</b> / Presentes: <b>{{$presentes}}</b>
+        </div>
+    </p>
+@endif
+
     <div class="container">
 
     @if(auth()->id() == 1)
@@ -23,7 +37,7 @@
             </div>
             <div class="col-md-8">
 
-            <div class="form-area">
+            <div class="form-area p-3 rounded">
                 <form method="POST" action="{{ route('forms.store') }}">
                     @csrf
                     <div class="row">
@@ -43,6 +57,11 @@
                         </div>
                     </div>
 
+                    @if (auth()->id() == 1)
+                        <input type="hidden" name="status" value=1>
+                    @else
+                        <input type="hidden" name="status" value=0>
+                    @endif
                     <input type="hidden" name="idFesta" value="{{  $festaId  }}">
                     <input type="hidden" name="idUsuario" value="{{  $usuarioId  }}">
 
@@ -60,13 +79,7 @@
                         {{ session('success') }}
                     </div>
             @endif
-
-            @php
-            $authId = DB::table('convidados')->where('festa_id',$festaId)->value('user_id');
-            @endphp
-
             @auth
-
                 <table class="table mt-5">
                     <thead>
                       <tr>
@@ -83,13 +96,13 @@
                     @endif
                       </tr>
                     </thead>
-                    <tbody>
-        
                         @php
                             $contador=0;
                         @endphp
+                        <tbody>
                         @foreach ( $convidados as $convidado )
-                            @if (auth()->id() == 1 || $convidado->festa_id == $festaId)
+                            @if((auth()->id()!=1 && $convidado->festa_id == $festaId && $authId == auth()->id()) || (auth()->id()==1 && $convidado->festa_id == $festaId))
+                                @if (($convidado->status!=0 && auth()->id() == 1) || (auth()->id() != 1))
                                 <tr>
                                     <td scope="col">{{ ++$contador }}</td>
                                     <td scope="col">{{ $convidado->nome }}</td>
@@ -145,14 +158,12 @@
                                     @endif
                                 </tr>
                             @endif
-                        @endforeach
-                    </tbody>
-                </table>
-      
-
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
 
             @endauth
-
             </div>
         </div>
     </div>
@@ -166,6 +177,12 @@
             padding: 20px;
             margin-top: 20px;
             background-color:rgba(55, 140, 209, 0.692);
+        }
+
+        #ElementoFixo{
+            position: fixed;
+            top: 20px; 
+            right: 20px;
         }
 
     </style>

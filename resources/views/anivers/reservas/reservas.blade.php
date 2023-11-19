@@ -15,11 +15,9 @@
                     <th scope="col">Idade Comemorada</th>
                     <th scope="col">Início</th>
                     <th scope="col">Fim</th>
-                    <th scope="col">Pacote de comidas</th>
-                    <th scope="col">Preço</th>
+                    <th scope="col">Pacote Escolhido</th>
                     <th scope="col">Status</th>
                     <th scope="col">Cancelar</th>
-                    <th scope="col">Editar Pacote</th>
                     <th scope="col">Links</th>
                 </tr>
                 </thead>
@@ -33,8 +31,13 @@
                         <td scope="col">{{ $solicitacao->idade }}</td>
                         <td scope="col">{{ $solicitacao->start . 'h' }}</td>
                         <td scope="col">{{ $solicitacao->end . 'h'}}</td>
-                        <td scope="col">{{ $solicitacao->pacotecomida }}</td>
-                        <td scope="col">{{ $solicitacao->preco_pacote . ' reais' }}</td>
+                        <td scope="col">
+                            <form action="{{ route('show.pacote', ['id' => $solicitacao->id]) }}" method="get">
+                            {{-- <form action="{{ route('editar.pacote', ['id' => $solicitacao->id]) }}" method="get"> --}}
+                                @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm">{{ $solicitacao->pacotecomida }}</button>
+                            </form>
+                        </td>
                         <td scope="col">
                             @if ($solicitacao->status === 0)
                                 <p>Em espera</a></td>
@@ -69,14 +72,6 @@
                         @else
                         <td scope="col"></td>
                         @endif
-
-                        <td scope="col">
-                            <form action="{{ route('editar.pacote', ['id' => $solicitacao->id]) }}" method="get">
-                                @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Editar</button>
-                            </form>
-                        </td>
-
 
                         <td scope="col">
                         @if ($solicitacao->status === 1)

@@ -68,6 +68,13 @@ class SolicitacaoController extends Controller
         return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');
     }
 
+    public function pacoteShow($id) {
+
+        $solicitacao = Solicitacao::find($id);
+
+        return view('anivers.reservas.pacote-escolhido', ['solicitacao' => $solicitacao]);
+    }
+
     public function destroy(string $id)
     {
 
