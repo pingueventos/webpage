@@ -92,7 +92,7 @@
                                 @endif
                             @elseif ($solicitacao->status === 2)
                             <td></td>
-                            @elseif ($solicitacao->status == 5)
+                            @elseif ($solicitacao->status == 5 && auth()->id() == 3)
                                 <td><a href="{{ route('resultadospesquisa', ['id' => $solicitacao->id]) }}">Pesquisa de satisfação</a></td>
                             @endif
                         </td>
