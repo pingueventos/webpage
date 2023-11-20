@@ -45,15 +45,19 @@ class SolicitacaoAdminController extends Controller
         {
             $solicitacao->update(['status' => $novoStatus]);
 
-            $diaPadrao = DB::table('calendars')->skip(Carbon::parse($dia->first()->dia)->dayOfWeek)->first();
+            $diaPadrao = DB::table('calendars')->skip(Carbon::parse($dia->dia)->dayOfWeek)->first();
             for ($i=$solicitacao->inicio; $i<$solicitacao->fim-1; $i++) {
                     // if($i < 0)
                     //     $i == 0;
                 $i = max($i, 0);
                 $horario = sprintf('h%02d', $i);
-                $dia->update([$horario => $diaPadrao->$horario]);
+                DB::table('calendars')->where('dia', $solicitacao->data)->update([$horario => $diaPadrao->$horario]);
             }
         }
+
+        else
+            $solicitacao->update(['status' => $novoStatus]);
+
 
         return redirect()->back()->with('success', 'Status atualizado com sucesso.');
 

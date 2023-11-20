@@ -8,6 +8,7 @@
     <a href="{{  route('comercdashboard')  }}">Dashboard</a>
 @endif
 
+
 <div class="container text-center">
 
 <h4>Recomendações pré-festa</h4>
@@ -19,11 +20,16 @@
 @endif
     @csrf <br>
     {{-- <div class="container text-center" > --}}
-        <input type="text" name="novaRecomendacao" id="novaRecomendacao"> 
+        <input type="text" name="novaRecomendacao" id="novaRecomendacao">
     <button class="btn btn-success btn-sm" type="submit">Adicionar</button>
     </form>
 
-    
+    @if (session('success'))
+    <div class="alert alert-success">
+    {{ session('success') }}
+    </div>
+@endif
+
 <table class="table mt-5">
     <thead class="text-center">
     <tr>
@@ -48,15 +54,15 @@
                     @else
                         <a href="{{  route('editarRecomendacaoComerc', $recomendacao->id) }}">
                     @endif
-                        <button class="btn btn-primary btn-sm">Editar</button> 
+                        <button class="btn btn-primary btn-sm">Editar</button>
                         </a>
                 </td>
                <td>
                     @if (auth()->id()==3)
                         <a href="{{  route('apagarRecomendacaoAdmin', $recomendacao->id) }}">
-                    @else    
+                    @else
                         <a href="{{  route('apagarRecomendacaoComerc', $recomendacao->id) }}">
-                    @endif    
+                    @endif
                         <button class="btn btn-danger btn-sm">Apagar</button>
                     </a>
                 </td>

@@ -1,6 +1,7 @@
 @extends('anivers.layouts.app')
 
 @section('content')
+<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
 
     <div class="container">
         <br><br><h4 align="center">Resultado: Pesquisa de Satisfação</h4>

@@ -96,7 +96,7 @@ class SolicitacaoController extends Controller
         // Atualizar o campo 'status' com o novo valor
         $solicitacao->update(['status' => $novoStatus]);
 
-        return redirect()->back()->with('success', 'Status atualizado com sucesso.');
+        return redirect()->back()->with('success', 'Festa cancelada com sucesso.');
         // $solicitacao = $this->solicitacao->find($id);
         // $solicitacao->delete();
         // return redirect()->back()->with('success', 'Solicitação realizada com sucesso!');

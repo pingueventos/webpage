@@ -75,7 +75,7 @@
                     console.error( error );
                 } );
         </script>
-     
+
         {{-- <label for="image">Imagem 1</label>
         <input type="file" name="imagem1">
 
@@ -89,11 +89,15 @@
 
 @if(auth()->id() == 3)
 <a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
-@else 
+@else
 <a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
 @endif
 
-</body> 
+@if (session('success'))
+    <div class="alert alert-success">
+    {{ session('success') }}
+@endif
+
+</body>
 
 @endsection
-    

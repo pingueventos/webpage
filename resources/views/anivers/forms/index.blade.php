@@ -6,7 +6,7 @@
     @if(auth()->id() == 1)
         <a href="{{  route('operacdashboard')  }}">Dashboard</a> <br><br>
     @else
-        <a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
+        <a href="{{  route('inicial.display')  }}">Página Inicial</a> <br><br>
     @endif
 @endauth
 

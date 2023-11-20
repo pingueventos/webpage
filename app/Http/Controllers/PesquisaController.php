@@ -12,6 +12,8 @@ class PesquisaController extends Controller
 
     public function store(Request $request)
     {
+        if(!$request->pesquisa)
+            $request->pesquisa = 'Nenhum comentário';
         Pesquisa::create([
             'festa_id' => $request->festaId,
             'questao1' => $request->questao_1,
@@ -24,7 +26,7 @@ class PesquisaController extends Controller
         $solicitacao=Solicitacao::where('id', $request->festaId);
         $solicitacao->update(['status'=> $request->status]);
 
-        return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
+        return redirect()->route('solicitacoes')->with('success','Pesquisa enviada com sucesso!');
     }
     public function show($festaid, $userid)
     {

@@ -150,3 +150,8 @@
     @endforeach
     </tbody>
 </table>
+
+@if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                @endif
