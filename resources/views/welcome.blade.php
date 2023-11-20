@@ -69,6 +69,11 @@
 </html>
 
 <script>
+
+
+
+
+
     let elementosExibidos = 0;
     const agendaCompleta = {!! json_encode($agenda) !!};
     const totalElementos = {!! json_encode(count($agenda)) !!};

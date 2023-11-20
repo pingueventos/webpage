@@ -41,22 +41,22 @@
                 <div>
                     <button id="adicionar" name="adicionar">+</button>
                 </div>
-                <form method="POST" action="{{ route('forms.store') }}">
+                <form method="POST" action="{{ route('forms.store') }}" onsubmit="return validarCPF()">
                     @csrf
                     <input type="hidden" value='1' name="quantidade" id="quantidade">
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Nome do Convidado</label>
-                            <input name="nome1" type="text" class="form-control">
+                            <label>Nome do Convidado 1</label>
+                            <input name="nome1" type="text" class="form-control" oninput="validarNome(this)" title="Insira apenas letras e espaços" minlength="2" maxlength="255" required>
                         </div>
 
                         <div class="col-md-2">
                             <label>Idade</label>
-                            <input name="idade1" type="number" class="form-control">
+                            <input name="idade1" type="number" class="form-control" pattern="[0-9]+" min="0" required>
                         </div>
                         <div class="col-md-4">
-                            <label>CPF</label>
-                            <input name="CPF1" type="number" class="form-control">
+                            <label>CPF (só números)</label>
+                            <input name="CPF1" id="cpf1" type="text" class="form-control" oninput="arrumarCPF(this)" maxlength="11" required>
 
                         </div>
                     </div>
@@ -177,10 +177,63 @@
     </div>
 
     <script>
+        cont = 1;
+
+        function validarNome(input) {
+            input.value = input.value.replace(/[^a-zA-ZçÇ\u00C0-\u017F\s]/g, '');
+        }
+
+        function arrumarCPF(cpf) {
+
+            cpf.value = cpf.value.replace(/\D/g, '');
+
+        }
+
+        function validarCPF() {
+    for (let index = 1; index <= cont; index++) {
+        var cpfInput = document.getElementById('cpf' + index);
+        var cpf = cpfInput.value.replace(/\D/g, '');
+        let soma = 0;
+
+        if (cpf.length !== 11) {
+            alert('CPF ' + index + ' inválido!');
+            return false;
+        }
+
+        for (let i = 0; i < 9; i++) {
+            soma += cpf.charAt(i) * (10 - i);
+        }
+        let resto = soma % 11;
+        let dv = resto < 2 ? 0 : 11 - resto;
+
+        if (dv != cpf.charAt(9)) {
+            alert('CPF ' + index + ' inválido!');
+            return false;
+        }
+
+        soma = 0;
+
+        for (let i = 0; i < 10; i++) {
+            soma += cpf.charAt(i) * (11 - i);
+        }
+
+        resto = soma % 11;
+        dv = resto < 2 ? 0 : 11 - resto;
+
+        if (dv != cpf.charAt(10)) {
+            alert('CPF ' + index + ' inválido!');
+            return false;
+        }
+
+    }
+    return true;
+}
+
+
         const addButton = document.getElementById('adicionar');
         const contador = document.getElementById('quantidade');
         const maisConvidados = document.getElementById('maisconvs');
-        let cont = 1;
+
 
         addButton.addEventListener('click', function()
         {
@@ -191,16 +244,16 @@
             novaDiv.classList.add('row');
             novaDiv.innerHTML = `
             <div class="col-md-6">
-                <label>Nome do Convidado</label>
-                <input name="nome${cont}" type="text" class="form-control">
+                <label>Nome do Convidado ${cont}</label>
+                <input name="nome${cont}" type="text" class="form-control" oninput="validarNome(this)" title="Insira apenas letras e espaços" minlength="2" maxlength="255" required>
             </div>
             <div class="col-md-2">
                 <label>Idade</label>
-                <input name="idade${cont}" type="number" class="form-control">
+                <input name="idade${cont}" type="number" class="form-control" pattern="[0-9]+" min="0" required>
             </div>
             <div class="col-md-4">
-                <label>CPF</label>
-                <input name="CPF${cont}" type="number" class="form-control">
+                <label>CPF (só números)</label>
+                <input name="CPF${cont}" id="cpf${cont}" type="number" class="form-control" required>
             </div>`;
 
                 maisConvidados.appendChild(novaDiv);

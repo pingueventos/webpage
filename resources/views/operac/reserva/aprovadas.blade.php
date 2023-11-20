@@ -26,7 +26,7 @@
                     @php
                         $contador=0;
                     @endphp
-                    @foreach ( $solicitacoes as $solicitacao )
+                    @foreach ( $solicitacoes->sortBy('inicio')->sortBy('data') as $solicitacao )
                         <tr>
                             @if ($solicitacao->status == 1)
                                 <td scope="col">{{ ++$contador }}</td>

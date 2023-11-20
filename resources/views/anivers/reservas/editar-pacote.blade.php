@@ -100,11 +100,11 @@
             var precoNovo = encontrarPreco(tabelaPacotes, aux);
 
             if(precoNovo > precoAntigo)
-                stringDiferenca = precoNovo - precoAntigo + ' reais a mais.';
+                stringDiferenca = precoNovo - precoAntigo + ' reais a mais (por pessoa).';
             else
             {
                 if(precoAntigo > precoNovo)
-                stringDiferenca = precoAntigo - precoNovo + ' reais a menos.';
+                stringDiferenca = precoAntigo - precoNovo + ' reais a menos (por pessoa).';
                 else
                 stringDiferenca = 'nenhuma.';
             }
