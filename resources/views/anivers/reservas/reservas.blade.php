@@ -24,7 +24,7 @@
                 <tbody class="text-center">
 
                     @foreach ( $solicitacoes as $key => $solicitacao )
-                    <tr> 
+                    <tr>
                         <td scope="col">{{ ++$key }}</td>
                         <td scope="col">{{ $solicitacao->nome}}</td>
                         <td scope="col">{{ $solicitacao->numconvidados}}</td>
@@ -40,7 +40,7 @@
                         </td>
                         <td scope="col">
                             @if ($solicitacao->status === 0)
-                                <p>Em espera</a></td>
+                                <p>Solicitado</a></td>
                             @elseif ($solicitacao->status === 1)
                                 <p class="text-success">Aprovada</p>
                             @elseif ($solicitacao->status === 2)
@@ -56,7 +56,7 @@
                         @if ($solicitacao->status === 0)
                             <form action="{{ route('cancelar', ['id' => $solicitacao->id]) }}" method="post">
                                 @csrf
-                                <td scope="col">            
+                                <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
                                     <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>
@@ -64,7 +64,7 @@
                         @elseif ($solicitacao->status === 1)
                             <form action="{{ route('cancelar', ['id' => $solicitacao->id]) }}" method="post">
                                 @csrf
-                                <td scope="col">            
+                                <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
                                     <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>
@@ -75,11 +75,11 @@
 
                         <td scope="col">
                         @if ($solicitacao->status === 1)
-                        <a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">Formulario de presenca</a>
-                        @elseif ($solicitacao->status === 4)  
-                        <a href="{{ route('forms.index') }}">Pesquisa de Satisfação</a>   
+                        <a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">Lista de convidados</a>
+                        @elseif ($solicitacao->status === 4)
+                        <a href="{{ route('pesquisadesatisfacao', ['id' => $solicitacao->id, 'user_id' => $solicitacao->user_id]) }}">Pesquisa de Satisfação</a>
                         @else
-                        <p></p>                       
+                        <p></p>
                         @endif
                         </td>
                     </tr>
@@ -93,7 +93,7 @@
 <a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
 
 <script>
-    
+
     $(document).ready(function () {
         console.log('Diferença de preço: ');
 

@@ -27,6 +27,9 @@ class SolicitacaoAdminController extends Controller
         if ($novoStatus== 1)
         {
             for ($i=$solicitacao->inicio; $i<$solicitacao->fim-1; $i++) {
+                // if($i < 0)
+                //     $i==0;
+                $i = max($i, 0);
                 $horario = sprintf('h%02d', $i);
                 $dia->update([$horario => 2]);
             }
@@ -36,6 +39,9 @@ class SolicitacaoAdminController extends Controller
         {
             $diaPadrao = DB::table('calendars')->skip(Carbon::parse($dia->first()->dia)->dayOfWeek)->first();
             for ($i=$solicitacao->inicio; $i<$solicitacao->fim-1; $i++) {
+                    // if($i < 0)
+                    //     $i == 0;
+                $i = max($i, 0);
                 $horario = sprintf('h%02d', $i);
                 $dia->update([$horario => $diaPadrao->$horario]);
             }

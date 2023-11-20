@@ -18,6 +18,7 @@
                         <th scope="col">Pacote de comidas</th>
                         <th scope="col">Confirmados</th>
                         <th scope="col">Ação</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
 
@@ -26,7 +27,7 @@
                         $contador=0;
                     @endphp
                     @foreach ( $solicitacoes as $solicitacao )
-                        <tr> 
+                        <tr>
                             @if ($solicitacao->status == 1)
                                 <td scope="col">{{ ++$contador }}</td>
                                 <td scope="col">{{ $solicitacao->nome}}</td>
@@ -35,7 +36,15 @@
                                 <td scope="col">{{ $solicitacao->fim - 1}}h00min</td>
                                 <td scope="col">{{ $solicitacao->pacotecomida }}</td>
                                 <td scope="col">{{ $solicitacao->confirmados }}</td>
-                                <td><a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">Lista de presenca</a></td>
+                                <td><a href="{{ route('forms.show', ['form'=>$solicitacao->id]) }}">
+                                    <button class="btn btn-secondary btn-sm">Lista de presenca</button></a></td>
+                                <td>
+                                    <form action="{{ route('finalizaFesta', ['id' => $solicitacao->id]) }}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="novo_status" value="4">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Finalizar</button>
+                                    </form>
+                                </td>
                             @endif
                         </tr>
                     @endforeach

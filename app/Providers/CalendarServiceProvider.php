@@ -20,6 +20,5 @@ class CalendarServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Artisan::call('db:seed', ['--class' => 'CalendarSeeder']);
     }
 }
