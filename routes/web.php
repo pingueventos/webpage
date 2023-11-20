@@ -36,7 +36,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Route::get('admin/dashboard/agenda', function(){
     //     return view('admin.agenda-buffet.agenda');
     // }) -> name('agenda');
-    Route::get('/admin/dashboard/agenda', [AgendaController::class, 'passaDia'])->name('agenda');
+    Route::get('/admin/dashboard/agenda', [AgendaController::class, 'passaDia'])->name('agendaadmin');
 
     // Route::resource("/admin/pacotescomida", PacotesController::class);
     Route::post("/admin/pacotescomida", [PacotesController::class, 'pacotesStore'])->name('pacotescomidaAdmin.store');

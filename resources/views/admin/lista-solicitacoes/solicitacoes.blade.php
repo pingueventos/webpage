@@ -83,15 +83,13 @@
                             @elseif ($solicitacao->status === 1)
                                 @if(auth()->id()==3)
                                     <form action="{{ route('statusAdmin', ['id' => $solicitacao->id]) }}" method="post">
-                                @else
-                                    <form action="{{ route('statusComerc', ['id' => $solicitacao->id]) }}" method="post">
-                                @endif
                                 @csrf
                                 <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
                                     <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>
-                            </form>
+                                    </form>
+                                @endif
                             @elseif ($solicitacao->status === 2)
                             <td></td>
                             @elseif ($solicitacao->status == 5)
