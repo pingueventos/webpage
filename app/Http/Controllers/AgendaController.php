@@ -30,7 +30,7 @@ class AgendaController extends Controller
                 DB::table('calendars')->where('diadasemana', $diaSemana)->where($horario, '!=', 2)->update([$horario => $acao]);
         }
 
-        return redirect()->route('admindashboard')->with('success', 'Valores atualizados com sucesso.');
+        return redirect()->back()->with('success', 'Valores atualizados com sucesso.');
     }
 
     public function updateEspecifico(Request $request)
@@ -45,7 +45,7 @@ class AgendaController extends Controller
                 DB::table('calendars')->where('dia', $data)->where($horario, '!=', 2)->update([$horario => $acao]);
         }
 
-        return redirect()->route('admindashboard')->with('success', 'Valores atualizados com sucesso.');
+        return redirect()->back()->with('success', 'Valores atualizados com sucesso.');
     }
 
     public function horariosSolicitacao(Calendar $calendario)
