@@ -12,6 +12,7 @@ use App\Http\Controllers\SolicitacaoController;
 use App\Http\Controllers\SolicitacaoAdminController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\paginapublica\InicialController;
+use App\Http\Controllers\RecomendationController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -62,9 +63,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
         return view('admin.pesquisa');
     }) -> name('resultadopesquisa');
 
-    Route::get('admin/dashboard/editar_recomendacoes', function(){
-        return view('admin.recomendacoes.recomprefesta');
-    }) -> name('editarrecomendacoes');
+    // Route::get('admin/dashboard/editar_recomendacoes', function(){
+    //     return view('admin.recomendacoes.recomprefesta');
+    // }) -> name('editarrecomendacoes');
+    Route::get('/admin/recomendacoes', [RecomendationController::class, 'displayRecomendacoes'])->name('listaRecomendacoesAdmin');
+    Route::get('/admin/recomendacoes-new', [RecomendationController::class, 'addRecomendacao'])->name('adicionarRecomendacaoAdmin');
+    Route::get('/admin/recomendacoes-edit/{id}', [RecomendationController::class, 'editRecomendacao'])->name('editarRecomendacaoAdmin');
+    Route::get('/admin/recomendacoes-update/{id}', [RecomendationController::class, 'updateRecomendacao'])->name('atualizarRecomendacaoAdmin');
+    Route::get('/admin/recomendacoes-delete/{id}', [RecomendationController::class, 'deleteRecomendacao'])->name('apagarRecomendacaoAdmin');
+
 
     Route::post('/update-global', [AgendaController::class, 'updateGlobal'])->name('update.global');
     Route::post('/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especifico');
@@ -88,6 +95,12 @@ Route::middleware(['auth','role:comerc'])->group(function () {
     Route::post('comerc/solicitacoesfesta/{id}', [SolicitacaoAdminController::class, 'statusFesta'])->name('statusComerc');
 
     Route::get('comerc/solicitacoesfesta', [SolicitacaoAdminController::class, 'todasSolicitacoes'])->name('todasSolicitacoesComerc');
+
+    Route::get('/comerc/recomendacoes', [RecomendationController::class, 'displayRecomendacoes'])->name('listaRecomendacoesComerc');
+    Route::get('/comerc/recomendacoes-new', [RecomendationController::class, 'addRecomendacao'])->name('adicionarRecomendacaoComerc');
+    Route::get('/comerc/recomendacoes-edit/{id}', [RecomendationController::class, 'editRecomendacao'])->name('editarRecomendacaoComerc');
+    Route::get('/comerc/recomendacoes-update/{id}', [RecomendationController::class, 'updateRecomendacao'])->name('atualizarRecomendacaoComerc');
+    Route::get('/comerc/recomendacoes-delete/{id}', [RecomendationController::class, 'deleteRecomendacao'])->name('apagarRecomendacaoComerc');
 
 });
 
@@ -122,12 +135,15 @@ Route::middleware(['auth','role:anivers'])->group(function () {
         return view('anivers.forms.formulario');
     }) -> name('formulario');
 
-    Route::get('/info-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteShow'])->name('show.pacote');
-    Route::get('/editar-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteEdit'])->name('editar.pacote');
+    Route::get('/anivers/info-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteShow'])->name('show.pacote');
+    Route::get('/anivers/editar-pacotecomida/{id}', [SolicitacaoController::class, 'pacoteEdit'])->name('editar.pacote');
     Route::post('anivers/solicitacoes/{id}', [SolicitacaoController::class, 'cancelar'])->name('cancelar');
     Route::get('anivers/solicitacoes', [SolicitacaoController::class, 'manage'])->name('solicitacoes');
 
     Route::resource("/anivers/novafesta", SolicitacaoController::class);
+
+    Route::get('/recomendacoes-Pre-Festa', [RecomendationController::class, 'showRecomendacao'])->name('verRecomendacao');
+
 });
 // Route::post("/forms/{festaid}", [ConvidadosController::class, 'display']) -> name('paraforms');
 Route::resource("/forms", ConvidadosController::class);
