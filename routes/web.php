@@ -76,14 +76,15 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/admin/recomendacoes-delete/{id}', [RecomendationController::class, 'deleteRecomendacao'])->name('apagarRecomendacaoAdmin');
 
 
-    Route::post('/update-global', [AgendaController::class, 'updateGlobal'])->name('update.global');
-    Route::post('/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especifico');
+    Route::post('admin/update-global', [AgendaController::class, 'updateGlobal'])->name('update.globaladmin');
+    Route::post('admin/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especificoadmin');
 });
 
 
 Route::middleware(['auth','role:comerc'])->group(function () {
     Route::get('comerc/dashboard', [ComercController::class, 'dashboard']) -> name('comercdashboard');
 
+    Route::get('/comerc/dashboard/agenda', [AgendaController::class, 'passaDia'])->name('agendacomerc');
     Route::resource("/comerc/pacotescomida", PacotesController::class);
     Route::post("/comerc/pacotescomida", [PacotesController::class, 'pacotesStore'])->name('pacotescomidaComerc.store');
     Route::get("/comerc/pacotescomida", [PacotesController::class, 'pacotesIndex'])->name('pacotescomidaComerc.index');
@@ -105,6 +106,8 @@ Route::middleware(['auth','role:comerc'])->group(function () {
     Route::get('/comerc/recomendacoes-update/{id}', [RecomendationController::class, 'updateRecomendacao'])->name('atualizarRecomendacaoComerc');
     Route::get('/comerc/recomendacoes-delete/{id}', [RecomendationController::class, 'deleteRecomendacao'])->name('apagarRecomendacaoComerc');
 
+    Route::post('comerc/update-global', [AgendaController::class, 'updateGlobal'])->name('update.globalcomerc');
+    Route::post('comerc/update-especifico', [AgendaController::class, 'updateEspecifico'])->name('update.especificocomerc');
 });
 
 Route::middleware(['auth','role:operac'])->group(function () {
