@@ -15,42 +15,38 @@ class ConvidadosController extends Controller
         $this->convidado = new Convidado();
 
     }
-    
+
     public function show($festaid)
     {
         $response['convidados'] = $this->convidado->all();
         $usuarioid = DB::table('solicitacoes')->where('id', $festaid)->value('user_id');
-        return view('anivers.forms.index', ['festaId' => $festaid, 'usuarioId' => $usuarioid])->with($response);
+        $status = DB::table('solicitacoes')->where('id', $festaid)->value('status');
+        if($status == 1)
+            return view('anivers.forms.index', ['festaId' => $festaid, 'usuarioId' => $usuarioid])->with($response);
     }
 
     public function store(Request $request)
     {
 
-        $request->validate([
-            'nome' => ['required', 'string', 'max:100'],
-            'CPF' => ['required', 'integer', 'unique:'.Convidado::class],
-            'idade' => ['required', 'integer'],
-        ],[
-            'nome.required' => 'Campo obrigatório'
+        for($i=1; $i<$request->quantidade + 1; $i++) {
 
-        ]);
+            $convidado = Convidado::create([
+                'nome' => $request->input('nome' . $i),
+                'CPF' => $request->input('CPF' . $i),
+                'idade' => $request->input('idade' . $i),
+                'festa_id' => $request->idFesta,
+                'user_id' => $request->idUsuario,
+                'status' => $request->status,
+            ]);
 
-        $convidado = Convidado::create([
-            'nome' => $request->nome,
-            'CPF' => $request->CPF,
-            'idade' => $request->idade,
-            'festa_id' => $request->idFesta,
-            'user_id' => $request->idUsuario,
-            'status' => $request->status,
-        ]);
-
-        if(auth()->id()==1)
-        {
-            $festaId = $convidado->festa_id;
-            $solicitacao = Solicitacao::find($festaId);
-            $confirmados = $solicitacao->confirmados;
-            $confirmados++;
-            $solicitacao->update(['confirmados' => $confirmados]);
+            if(auth()->id()==1)
+            {
+                $festaId = $convidado->festa_id;
+                $solicitacao = Solicitacao::find($festaId);
+                $confirmados = $solicitacao->confirmados;
+                $confirmados++;
+                $solicitacao->update(['confirmados' => $confirmados]);
+            }
         }
 
         return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
@@ -71,7 +67,7 @@ class ConvidadosController extends Controller
             $solicitacao->update(['presentes' => $presentes]);
         }
 
-        if ($convidado->status == 1) 
+        if ($convidado->status == 1)
         {
             $festaId = $convidado->festa_id;
             $solicitacao = Solicitacao::find($festaId);
@@ -101,7 +97,7 @@ class ConvidadosController extends Controller
                 $solicitacao->update(['presentes' => $presentes]);
             }
         }
-        $convidado->delete();   
+        $convidado->delete();
 
         return redirect()->back();
     }
