@@ -1,6 +1,11 @@
 <h1>Editar agenda</h1>
 
-    <form method="POST" action="{{ route('update.global') }}">
+        @if(auth()->id() == 3)
+            <form method="POST" action="{{ route('update.globaladmin') }}">
+        @else
+            <form method="POST" action="{{ route('update.globalcomerc') }}">
+        @endif
+
         @csrf
         <h2>Configuração semanal global</h2>
 
@@ -53,8 +58,12 @@
             <button type="submit">Atualizar Globalmente</button>
     </form>
 
-    <form method="POST" action="{{ route('update.especifico') }}">
-        @csrf
+    @if(auth()->id() == 3)
+        <form method="POST" action="{{ route('update.especificoadmin') }}">
+    @else
+        <form method="POST" action="{{ route('update.especificocomerc') }}">
+    @endif
+            @csrf
         <h2>Configuração diária específica</h2>
 
             <label for="diaespecifico">
@@ -103,7 +112,11 @@
     </form>
 <br>
 
-<a href="{{  route('admindashboard')  }}">Dashboard</a>
+@if(auth()->id() == 3)
+        <a href="{{  route('admindashboard')  }}">Dashboard</a>
+    @else
+        <a href="{{  route('comercdashboard')  }}">Dashboard</a>
+    @endif
 <br><br>
 
 <table>

@@ -13,6 +13,7 @@
                     <th scope="col">Aniversariante</th>
                     <th scope="col">Nº de Convidados</th>
                     <th scope="col">Idade Comemorada</th>
+                    <th scope="col">Data</th>
                     <th scope="col">Início</th>
                     <th scope="col">Fim</th>
                     <th scope="col">Pacote Escolhido</th>
@@ -29,8 +30,9 @@
                         <td scope="col">{{ $solicitacao->nome}}</td>
                         <td scope="col">{{ $solicitacao->numconvidados}}</td>
                         <td scope="col">{{ $solicitacao->idade }}</td>
-                        <td scope="col">{{ $solicitacao->start . 'h' }}</td>
-                        <td scope="col">{{ $solicitacao->end . 'h'}}</td>
+                        <td scope="col">{{ $solicitacao->data }}</td>
+                        <td scope="col">{{ $solicitacao->inicio+1 . 'h' }}</td>
+                        <td scope="col">{{ $solicitacao->fim-1 . 'h'}}</td>
                         <td scope="col">
                             <form action="{{ route('show.pacote', ['id' => $solicitacao->id]) }}" method="get">
                             {{-- <form action="{{ route('editar.pacote', ['id' => $solicitacao->id]) }}" method="get"> --}}
