@@ -103,4 +103,14 @@
                 </tbody>
             </table>
     </div>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @elseif(session('falha'))
+    <div class="alert alert-danger">
+        {{ session('falha') }}
+    </div>
+    @endif
+
 @endsection
