@@ -1,4 +1,5 @@
 <h3>Pesquisa de Satisafação</h3>
+<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
 
 <form action="{{ route('pesquisa.store') }}" method="post">
     @csrf
@@ -31,7 +32,7 @@
         <input type="radio" name="questao_4" value="Péssimo" required> Péssimo <br>
 
     <p>Deixe aqui seu comentário ou sugestão</p>
-        <input type="text" name="pesquisa" value="" required>
+        <input type="text" name="pesquisa" value="" maxlength="255">
 
         <input type="hidden" name="festaId" value="{{ $festaId }}">
         <input type="hidden" name="status" value=5>

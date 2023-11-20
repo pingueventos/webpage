@@ -1,9 +1,10 @@
 @extends('anivers.layouts.app')
 
 @section('content')
-    
-<br><br>
 
+<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
+
+<br><br>
 
 <div class="container">
     <h4 align="center">Recomendações Pré-Festa</h4>
@@ -18,7 +19,7 @@
     <tbody class="text-center">
 
         @foreach ( $recomendacoes as $key => $recomendacao )
-        <tr> 
+        <tr>
             <td scope="col">{{ ++$key }}</td>
             <td scope="col">{{ $recomendacao->recomendacao }}</td>
         </tr>
@@ -27,3 +28,4 @@
 </table>
 
 @endsection
+

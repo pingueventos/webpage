@@ -40,8 +40,8 @@ class RecomendationController extends Controller
     public function deleteRecomendacao($id)
     {
         $recomendacao = Recomendation::find($id);
-        $recomendacao->delete();   
-        return redirect()->back();
+        $recomendacao->delete();
+        return redirect()->back()->with('success', 'Recomendação removida com sucesso.');
     }
 
     public function showRecomendacao ()
