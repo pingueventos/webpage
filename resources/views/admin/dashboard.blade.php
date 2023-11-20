@@ -6,8 +6,8 @@
 <a href="{{ route('agenda') }}">Agenda</a><br><br>
 <a href="{{ route('todasSolicitacoesAdm') }}">Solicitacoes de Festa</a><br><br>
 <a href="{{ route('pacotesAdmin') }}">Pacotes de Comida</a><br><br>
-<a href="{{ route('editarrecomendacoes') }}">Recomendoes Pré-Festa</a><br><br>
-<a href="{{ route('resultadopesquisa') }}">Resultados: Pesquisa de Satisfação</a><br><br>
+<a href="{{ route('listaRecomendacoesAdmin') }}">Recomendações pré-festa</a><br><br>
+{{-- <a href="{{ route('resultadopesquisa') }}">Resultados: Pesquisa de Satisfação</a><br><br> --}}
 
 
 <form method="POST" action="{{ route('logout') }}">

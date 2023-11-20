@@ -4,7 +4,7 @@
    > - Acesso a alguma linha de comando (CLI);<br>
    > - Acesso a algum web browser.<br>
 
-# Passo a passo
+# Instruções para primeira execução
 Clone o repositório no diretório desejado da sua máquina através da CLI
 ```sh
 git clone -b develop https://github.com/pingueventos/webpage pingu-webpage
@@ -83,6 +83,15 @@ docker compose exec app bash
 > php artisan storage:link
 > ```
 
+Descomente as linhas a seguir do arquivo /app/Providers/AppServiceProvider.php (apague as '//')
+```sh
+# Descomente as linhas abaixo        
+//        $solicitacao=DB::table('solicitacoes')->get();
+//        View::share('solicitacoes', $solicitacao);
+//        $pacote=DB::table('pacotes')->get();
+//        View::share('pacotes', $pacote);
+//        Artisan::call('db:seed', ['--class' => 'CalendarSeeder']);
+```
 
 Acesse o projeto acessando o link abaixo em algum web browser<br>
 [http://localhost:1606](http://localhost:1606)

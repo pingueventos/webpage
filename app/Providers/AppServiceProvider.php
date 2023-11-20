@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,15 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 # Descomente as quatro linhas abaixo
-    if (!(DB::table('solicitacoes')==null))
-    {
-       $solicitacao=DB::table('solicitacoes')->get();
-       View::share('solicitacoes', $solicitacao);
-    }
-    if (!(DB::table('pacotes')==null))
-    {
-        $pacote=DB::table('pacotes')->get();
-        View::share('pacotes', $pacote);
-    }
+           $solicitacao=DB::table('solicitacoes')->get();
+           View::share('solicitacoes', $solicitacao);
+           $pacote=DB::table('pacotes')->get();
+           View::share('pacotes', $pacote);
+           Artisan::call('db:seed', ['--class' => 'CalendarSeeder']);
+
     }
 }
