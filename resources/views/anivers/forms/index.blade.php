@@ -5,7 +5,7 @@
 @auth
     @if(auth()->id() == 1)
         <a href="{{  route('operacdashboard')  }}">Dashboard</a> <br><br>
-    @else 
+    @else
         <a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
     @endif
 @endauth
@@ -15,9 +15,9 @@
     $confirmados = DB::table('solicitacoes')->where('id',$festaId)->value('confirmados');
     $presentes = DB::table('solicitacoes')->where('id',$festaId)->value('presentes');
 @endphp
-    
+
 @if (auth()->id()==1)
-    <p> 
+    <p>
         <div id="ElementoFixo" class="bg-secondary text-white p-3 rounded">
             Confirmados:<b> {{$confirmados}}</b> / Presentes: <b>{{$presentes}}</b>
         </div>
@@ -38,23 +38,31 @@
             <div class="col-md-8">
 
             <div class="form-area p-3 rounded">
+                <div>
+                    <button id="adicionar" name="adicionar">+</button>
+                </div>
                 <form method="POST" action="{{ route('forms.store') }}">
                     @csrf
+                    <input type="hidden" value='1' name="quantidade" id="quantidade">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Nome do Convidado</label>
-                            <input name="nome" type="text" class="form-control">
+                            <input name="nome1" type="text" class="form-control">
                         </div>
 
                         <div class="col-md-2">
                             <label>Idade</label>
-                            <input name="idade" type="number" class="form-control">
+                            <input name="idade1" type="number" class="form-control">
                         </div>
                         <div class="col-md-4">
                             <label>CPF</label>
-                            <input name="CPF" type="number" class="form-control">
+                            <input name="CPF1" type="number" class="form-control">
 
                         </div>
+                    </div>
+
+                    <div id="maisconvs">
+
                     </div>
 
                     @if (auth()->id() == 1)
@@ -109,7 +117,7 @@
                                     <td scope="col">{{ $convidado->CPF }}</td>
                                     <td scope="col">{{ $convidado->idade }}</td>
                                     <td scope="col">
-                                    @if ($authId == auth()->id()) 
+                                    @if ($authId == auth()->id())
                                        @if ($convidado->status === 0)
                                             <p>Em espera</a></td>
                                         @elseif ($convidado->status == 1 || $convidado->status == 2)
@@ -128,19 +136,19 @@
                                     @if ($convidado->status == 0)
                                         <form action="{{ route('status.update', ['id' => $convidado->id]) }}" method="post">
                                             @csrf
-                                            <td scope="col">            
+                                            <td scope="col">
                                                 <input type="hidden" name="novo_status" value="1">
                                                 <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
-                    
+
                                             </td>
                                         </form>
                                     @elseif ($convidado->status == 1 && auth()->id() == 1)
                                         <form action="{{ route('status.update', ['id' => $convidado->id]) }}" method="post">
                                             @csrf
-                                            <td scope="col">            
+                                            <td scope="col">
                                                 <input type="hidden" name="novo_status" value="2">
                                                 <button type="submit" class="btn btn-success btn-sm">Presente</button>
-                    
+
                                             </td>
                                         </form>
                                     @else
@@ -168,6 +176,38 @@
         </div>
     </div>
 
+    <script>
+        const addButton = document.getElementById('adicionar');
+        const contador = document.getElementById('quantidade');
+        const maisConvidados = document.getElementById('maisconvs');
+        let cont = 1;
+
+        addButton.addEventListener('click', function()
+        {
+            cont++;
+            contador.value = cont;
+
+            const novaDiv = document.createElement('div');
+            novaDiv.classList.add('row');
+            novaDiv.innerHTML = `
+            <div class="col-md-6">
+                <label>Nome do Convidado</label>
+                <input name="nome${cont}" type="text" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <label>Idade</label>
+                <input name="idade${cont}" type="number" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label>CPF</label>
+                <input name="CPF${cont}" type="number" class="form-control">
+            </div>`;
+
+                maisConvidados.appendChild(novaDiv);
+
+        });
+    </script>
+
 @endsection
 
 
@@ -181,7 +221,7 @@
 
         #ElementoFixo{
             position: fixed;
-            top: 20px; 
+            top: 20px;
             right: 20px;
         }
 
