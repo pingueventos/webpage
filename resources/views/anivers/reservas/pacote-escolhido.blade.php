@@ -1,9 +1,12 @@
 @extends('anivers.layouts.app')
 
 @section('content')
+<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
 <div class="container-fluid" align="center">
     <br><br><h4 align="center"><b>Pacote Escolhido </b></h4>
     <h4>{{ $solicitacao->pacotecomida}}</h4><br>
+
+
     <form action="{{ route('editar.pacote', ['id' => $solicitacao->id]) }}" method="get">
         @csrf
             <button type="submit" class="btn btn-primary btn-sm">Editar</button><br><br>

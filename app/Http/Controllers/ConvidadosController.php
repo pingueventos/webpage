@@ -48,8 +48,10 @@ class ConvidadosController extends Controller
                 $solicitacao->update(['confirmados' => $confirmados]);
             }
         }
-
-        return redirect()->back()->with('success','Convidado(a) adicionado)(a) com sucesso!');
+        if(auth()->id() == 1)
+            return redirect()->back()->with('success','Convidado adicionado com sucesso!');
+        else
+            return redirect()->back()->with('success','Convite solicitado com sucesso!');
     }
 
     public function updateStatus(string $id)
@@ -99,6 +101,6 @@ class ConvidadosController extends Controller
         }
         $convidado->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Status atualizado com sucesso!');
     }
 }

@@ -51,6 +51,11 @@
                 </tbody>
             </table>
     </div>
+    @if (session('success'))
+        <div class="alert alert-success">
+        {{ session('success') }}
+    @endif
+
 @endsection
 
 <a href="{{  route('operacdashboard')  }}">Dashboard</a> <br><br>

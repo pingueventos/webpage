@@ -2,7 +2,7 @@
 
 @section('content')@if(auth()->id() == 3)
 <a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
-@else 
+@else
 <a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
 @endif
 
@@ -19,7 +19,7 @@
             <div class="alert alert-success">
                 {{ $success }}
             </div>
-        
+
     </div>
     @endif
 
@@ -42,7 +42,7 @@
                 <tbody>
 
                     @foreach ( $pacotes as $key => $pacote )
-                    <tr> 
+                    <tr>
                         <td scope="col">{{ ++$key }}</td>
                         <td scope="col">{{ $pacote->titulo}}</td>
                         <td scope="col">{!! $pacote->comidas !!}
@@ -70,8 +70,12 @@
                         </td>
 
                         <td scope="col">
-                            @if (auth()->id() == 3)<form action="{{ route('pacotesAdmin.delete', $pacote->id) }}" method="POST" style ="display:inline">
-                            @else <form action="{{ route('pacotesComerc.delete', $pacote->id) }}" method="POST" style ="display:inline"> @csrf
+                            @if (auth()->id() == 3)
+                                <form action="{{ route('pacotesAdmin.delete', $pacote->id) }}" method="POST" style ="display:inline">
+                                    @csrf
+                            @else
+                                <form action="{{ route('pacotesComerc.delete', $pacote->id) }}" method="POST" style ="display:inline">
+                                    @csrf
                            @endif
                            @method('DELETE')
                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
@@ -83,7 +87,10 @@
             </table>
     </div>
 
-
+    @if (session('success'))
+        <div class="alert alert-success">
+        {{ session('success') }}
+    @endif
 
 
 @endsection
