@@ -1,32 +1,37 @@
 @extends('anivers.layouts.app')
 
 @section('content')
+
+<div class="header">
+    <img src="/css/images_css/logo.png" id="logo">
+</div>
+
 @if(auth()->id() == 3)
-<a href="{{  route('admindashboard')  }}">Dashboard</a> <br><br>
+<a href="{{  route('admindashboard')  }}" id="logout">Dashboard</a> <br><br>
 
 @else
-<a href="{{  route('comercdashboard')  }}">Dashboard</a> <br><br>
+<a href="{{  route('comercdashboard')  }}" id="logout">Dashboard</a> <br><br>
 @endif
 
-    <div class="container">
+    <div class="tudo">
 
         <h3 align="center" class="mt-5">Solicitações</h3>
 
 
-            <table class="table mt-5">
+            <table class="tabela">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Aniversariante</th>
-                    <th scope="col">Número de Convidados</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Idade Comemorada</th>
-                    <th scope="col">Início da Festa</th>
-                    <th scope="col">Fim da Festa</th>
-                    <th scope="col">Pacote de comidas</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Ação</th>
-                    <th scope="col"></th>
+                    <th id="nomecol" scope="col">#</th>
+                    <th id="nomecol" scope="col">Aniversariante</th>
+                    <th id="nomecol" scope="col">Número de Convidados</th>
+                    <th id="nomecol" scope="col">Data</th>
+                    <th id="nomecol" scope="col">Idade Comemorada</th>
+                    <th id="nomecol" scope="col">Início da Festa</th>
+                    <th id="nomecol" scope="col">Fim da Festa</th>
+                    <th id="nomecol" scope="col">Pacote de comidas</th>
+                    <th id="nomecol" scope="col">Status</th>
+                    <th id="nomecol" scope="col">Aprovar</th>
+                    <th id="nomecol" scope="col">Negar</th>
                 </tr>
                 </thead>
 

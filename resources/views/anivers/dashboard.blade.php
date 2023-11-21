@@ -2,18 +2,37 @@
 
 @section('content')
 
-<br><h3 align="center">Aniversariante Dashboard</h3>
+<div class="header">    
+    <img src="/css/images_css/logo.png" id="logo">
+</div>
 
-<a href="{{ route('solicitacoes') }}">Reservas</a><br><br>
+<div class="tudo">
+        <br><h3 id="toptext">Área do Aniversariante</h3>
 
-<a href="{{ route('novafesta.index') }}">Solicitar festa</a><br><br>
+        <div class="areabotoes">
+            <span class="botoes"><a href="{{ route('solicitacoes') }}" id="opc">Reservas
+            <br>    
+            <img src="/css/images_css/agenda.png" alt="">
+            </a></span>
+        
+            <span class="botoes"><a href="{{ route('novafesta.index') }}" id="opc">Solicitar festa
+            <br>    
+            <img src="/css/images_css/bolo.png" alt="">
+            </a></span>
 
-<a href="{{ route('verRecomendacao')}}">Reomendações pré-festa</a>
+            <span class="botoes">
+            <a href="{{ route('verRecomendacao')}}" id="opc">Recomendações pré-festa
+            <br>
+            <img src="/css/images_css/livro.png" alt="">
+            </a></span>
+        
+        </div>
+    </div>
 
 <br><br><br>
-<form method="POST" action="{{ route('logout') }}">
+<form method="POST" action="{{ route('logout') }}" id="logout">
     @csrf
-    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+    <a style="color: white;" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              this.closest('form').submit();" >
     Logout</a>
 

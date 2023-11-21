@@ -3,8 +3,13 @@
 
 @section('content')
 
-    <a href="{{ route('aniversdashboard')}}">Dashboard</a>
-    <div class="container">
+    <div class="header">
+            <img src="/css/images_css/logo.png" id="logo">
+    </div>
+
+    <a href="{{ route('aniversdashboard')}}" id="logout">Dashboard</a>
+
+    <div class="formfesta">
 
         <h3 align="center" class="mt-5">Nova Festa</h3>
 
@@ -25,7 +30,7 @@
 
                         <div class="col-md-2" align="center">
                             <label>Idade</label>
-                            <input type="number" name="idade" id="idade" class="form-control" pattern="[0-9]+" min="0" required>
+                            <input type="number" name="idade" id="idade" class="form-control" pattern="[0-9]+" min="0" max="200" required>
 
                         </div>
 
@@ -63,7 +68,7 @@
 
                         <div class="col-md-3" align="center">
                             <label>Num de Convidados</label>
-                            <input type="number" name="numconvidados" id="numconvidados" class="form-control" pattern="[0-9]+" min="0" title="Apenas números inteiros são permitidos" required>
+                            <input type="number" name="numconvidados" id="numconvidados" class="form-control" pattern="[0-9]+" min="0" max="5000" title="Apenas números inteiros são permitidos" required>
                         </div>
 
                         <div class="col-md-3">
@@ -79,7 +84,7 @@
                     <input type="hidden" name="pacotecomida" value="{{ $pacote->titulo }}">
                     <div class="row">
                         <div class="col-md-12 mt-3" align="right">
-                            <input type="submit" class="btn btn-primary" value="Register">
+                            <input type="submit" class="btn btn-primary" id="botaosolic" value="Register">
                         </div>
                     </div>
                 </form>
@@ -93,7 +98,7 @@
         </div>
     </div>
 
-    <div class="container-xg">
+    <div class="pacotes_edit">
         <h3 align="center" class="mt-5">Pacotes Comida</h3>
 
             <table class="table mt-5 mb-5">
@@ -134,7 +139,7 @@
 
     </div>
 
-    <div>
+    <div class="corpo">
         <h1>Agenda</h1>
 
         <table cellspacing="8" cellpadding="8">
