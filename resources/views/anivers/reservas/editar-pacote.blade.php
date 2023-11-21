@@ -2,33 +2,42 @@
 
     @section('content')
 
-    <br><br><br>
-    <div class="container-fluid" align="center">
+    <div class="header">
+        <img src="/css/images_css/logo.png" id="logo">
+    </div>
 
-        <form action="{{route('novafesta.update', $solicitacao->id) }}" method="post">
-            @csrf
-            @method('PATCH')
 
-                <input type="hidden" name="user_id" value="{{ $solicitacao->user_id }}">
-                <input type="hidden" name="idade" value="{{ $solicitacao->idade }}">
-                <input type="hidden" name="start" value="{{ $solicitacao->start }}">
-                <input type="hidden" name="end" value="{{ $solicitacao->end }}">
-                <input type="hidden" name="numconvidados" value="{{ $solicitacao->numconvidados }}">
+    <div class="mainboxeditar" align="center">
 
-            <!-- Outros campos editáveis -->
-                <div class="col-md-2">
-                    <h4>Editar Pacote</h4>
-                        <select id="pacotecomida" name="pacotecomida" class="form-control">
-                            <option align="center" disabled selected>Selecione um pacote</option>
-                                @foreach ( $pacotes as $pacote )
-                                    <option value="{{ $pacote->titulo }}" align="center">{{ $pacote->titulo }}</option>
-                                @endforeach
-                        </select>
+        <div class="boxeditar">
+            <form action="{{route('novafesta.update', $solicitacao->id) }}" method="post">
+                @csrf
+                @method('PATCH')
+                    <input type="hidden" name="user_id" value="{{ $solicitacao->user_id }}">
+                    <input type="hidden" name="idade" value="{{ $solicitacao->idade }}">
+                    <input type="hidden" name="start" value="{{ $solicitacao->start }}">
+                    <input type="hidden" name="end" value="{{ $solicitacao->end }}">
+                    <input type="hidden" name="numconvidados" value="{{ $solicitacao->numconvidados }}">
+                <!-- Outros campos editáveis -->
+                    <div class="col-md-2">
+                        <p id="textoboxeditar">Editar Pacote</p>
+                        <br>
+                            <select id="pacotecomida" name="pacotecomida" class="form-control">
+                                <option align="center" disabled selected>Selecione um pacote</option>
+                                    @foreach ( $pacotes as $pacote )
+                                        <option value="{{ $pacote->titulo }}" align="center">{{ $pacote->titulo }}</option>
+                                    @endforeach
+                            </select>
+                    </div>
+        </div>
+                
+                
+                <div class="boxeditar">
+                    <p id="textoboxeditar">Diferença de preço:</p>
+                    <div id="difpreco"></div>
+                    <br>
+                    <button class="btn btn-success" type="submit">Salvar Edição</button>
                 </div>
-                <div>Diferença de preço:</div>
-                <div id="difpreco"></div>
-                <br>
-                <button class="btn btn-success" type="submit">Salvar Edição</button>
         </form>
         @if (session('success'))
         <div class="alert alert-success">
@@ -38,12 +47,12 @@
 
     </div>
     <br><br><br>
-    <div class="container text-center">
+    
+    
+    <div class="pacotes_edit" align="center">
+
         <h5 align="center" class="mt-5"><b>Pacotes Comida</b></h5>
 
-    </div>
-
-    <div class="d-flex justify-content-center">
         <table class="table mt-3 mx-auto">
             <thead>
                 <tr>
@@ -85,7 +94,7 @@
 
 
     <div class="text-center mt-3">
-    <a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
+    <a href="{{  route('aniversdashboard')  }}" id="logout">Dashboard</a> <br><br>
     </div>
 
 

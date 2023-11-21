@@ -1,17 +1,29 @@
 @extends('anivers.layouts.app')
 
 @section('content')
-<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
-<div class="container-fluid" align="center">
-    <br><br><h4 align="center"><b>Pacote Escolhido </b></h4>
-    <h4>{{ $solicitacao->pacotecomida}}</h4><br>
+
+<div class="header">
+        <img src="/css/images_css/logo.png" id="logo">
+</div>
+
+<a href="{{  route('aniversdashboard')  }}" id="logout">Dashboard</a> <br><br>
+
+<div class="tudo" align="center">
+    
+    <div class="pac_escolhido">
+        <h4 align="center"><b>Pacote Escolhido </b></h4>
+        <h4>{{ $solicitacao->pacotecomida}}</h4><br>
+    
 
 
     <form action="{{ route('editar.pacote', ['id' => $solicitacao->id]) }}" method="get">
         @csrf
-            <button type="submit" class="btn btn-primary btn-sm">Editar</button><br><br>
+            <button type="submit" class="btn btn-primary btn-sm" id="botaopadrao">Editar</button><br><br>
     </form>
-    <table class="table mt-3 mx-auto">
+    </div>
+
+    <br><br>
+    <table class="tabela">
         <thead>
             <tr>
                 <th scope="col">Descrição Comidas</th>

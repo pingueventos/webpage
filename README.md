@@ -1,4 +1,8 @@
-## Requisitos para primeira execução:
+## Links
+   > - Cronograma de planejamento: https://trello.com/invite/b/MHJiyhtr/ATTI91e10121dd47488b3b3416460a775f2353AE0309/trabalho-final-pi-buffet <br>
+   > - Estudo de telhas: https://www.figma.com/file/sSpl7Zp4vJv1bp9duXJX9S/Proj.-Buffet?type=design&node-id=0-1&mode=design
+
+## Requisitos para execução:
    > - Docker instalado e em execução na máquina destino;<br>
    > - Conexão com a internet (para baixar os arquivos);<br>
    > - Acesso a alguma linha de comando (CLI);<br>
@@ -28,7 +32,7 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-Posicione as imagens dos pacotes bases através da CLI
+Posicione as imagens dos pacotes de comida iniciais através da CLI
 ```sh
 cp -r imagens storage/app/public
 ```
@@ -93,5 +97,20 @@ Descomente as linhas a seguir do arquivo /app/Providers/AppServiceProvider.php (
 //        Artisan::call('db:seed', ['--class' => 'CalendarSeeder']);
 ```
 
+
 Acesse o projeto acessando o link abaixo em algum web browser<br>
 [http://localhost:1606](http://localhost:1606)
+
+# Instruções para próximas execuções
+
+Suba os containers do projeto através da CLI
+```sh
+docker compose up -d
+```
+
+Acesse o projeto acessando o link abaixo em algum web browser<br>
+[http://localhost:1606](http://localhost:1606)
+
+## Acesso a informações de tabelas
+Todas as tabelas podem ser consultadas em [http://localhost:8888](http://localhost:8888) <br>
+(Credenciais são as adicionadas no arquivo .env)

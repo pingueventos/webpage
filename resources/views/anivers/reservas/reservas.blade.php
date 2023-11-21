@@ -2,24 +2,28 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="header">
+        <img src="/css/images_css/logo.png" id="logo">
+    </div>
 
-        <h3 align="center" class="mt-5">Solicitações</h3>
+    <div class="tudo">
 
-            <table class="table mt-5">
+        <h3 align="center" class="toptext">Solicitações</h3>
+
+            <table align="center" class="tabela">
                 <thead class="text-center">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Aniversariante</th>
-                    <th scope="col">Nº de Convidados</th>
-                    <th scope="col">Idade Comemorada</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Início</th>
-                    <th scope="col">Fim</th>
-                    <th scope="col">Pacote Escolhido</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Cancelar</th>
-                    <th scope="col">Links</th>
+                    <th id="nomecol" scope="col">#</th>
+                    <th id="nomecol" scope="col">Aniversariante</th>
+                    <th id="nomecol" scope="col">Nº de Convidados</th>
+                    <th id="nomecol" scope="col">Idade Comemorada</th>
+                    <th id="nomecol" scope="col">Data</th>
+                    <th id="nomecol" scope="col">Início</th>
+                    <th id="nomecol" scope="col">Fim</th>
+                    <th id="nomecol" scope="col">Pacote Escolhido</th>
+                    <th id="nomecol" scope="col">Status</th>
+                    <th id="nomecol" scope="col">Cancelar</th>
+                    <th id="nomecol" scope="col">Links</th>
                 </tr>
                 </thead>
                 <tbody class="text-center">
@@ -60,7 +64,7 @@
                                 @csrf
                                 <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
-                                    <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
+                                    <button id="botaocancelar"      type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>
                             </form>
                         @elseif ($solicitacao->status === 1)
@@ -68,7 +72,7 @@
                                 @csrf
                                 <td scope="col">
                                     <input type="hidden" name="novo_status" value="3">
-                                    <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
+                                    <button id="botaocancelar" type="submit" class="btn btn-danger btn-sm">Cancelar</button>
                                 </td>
                             </form>
                         @else
@@ -97,7 +101,7 @@
     @endif
 @endsection
 
-<a href="{{  route('aniversdashboard')  }}">Dashboard</a> <br><br>
+<a href="{{  route('aniversdashboard')  }}" id="logout">Dashboard</a> <br><br>
 
 <script>
 
