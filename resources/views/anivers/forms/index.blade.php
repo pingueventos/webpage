@@ -20,28 +20,28 @@
         $confirmados = DB::table('solicitacoes')->where('id',$festaId)->value('confirmados');
         $presentes = DB::table('solicitacoes')->where('id',$festaId)->value('presentes');
     @endphp
-    
+
     @if (auth()->id()==1)
         <p>
-            <div id="ElementoFixo" class="bg-secondary text-white p-3 rounded">
+            <div style="position:fixed;" class="bg-secondary text-white p-3 rounded">
                 Confirmados:<b> {{$confirmados}}</b> / Presentes: <b>{{$presentes}}</b>
             </div>
         </p>
     @endif
-    
+
         <div class="container">
-    
+
         @if(auth()->id() == 1)
             <h3 align="center" class="mt-5">Adicionar Convidado Extra</h3>
         @else
             <h3 align="center" class="mt-5">Formulário de Convidados</h3>
         @endif
-    
+
             <div class="row" align="center">
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-8">
-    
+
                 <div class="area_addconvidado">
                     <div>
                         <button id="adicionar" name="adicionar">+</button>
@@ -54,23 +54,23 @@
                                 <label>Nome do Convidado 1</label>
                                 <input name="nome1" type="text" class="form-control" oninput="validarNome(this)" title="Insira apenas letras e espaços" minlength="2" maxlength="255" required>
                             </div>
-    
+
                             <div class="col-md-2">
                                 <label>Idade</label>
-                                <input name="idade1" type="number" class="form-control" pattern="[0-9]+" min="0" required>
+                                <input name="idade1" type="number" class="form-control" pattern="[0-9]+" min="0" max="200" required>
                             </div>
                             <div class="col-md-4">
                                 <label>CPF (só números)</label>
                                 <input name="CPF1" id="cpf1" type="text" class="form-control" oninput="arrumarCPF(this)" maxlength="11" required>
-    
+
                             </div>
-                            
+
                         </div>
-    
+
                         <div id="maisconvs">
-    
+
                         </div>
-    
+
                         @if (auth()->id() == 1)
                             <input type="hidden" name="status" value=1>
                         @else
@@ -78,16 +78,16 @@
                         @endif
                         <input type="hidden" name="idFesta" value="{{  $festaId  }}">
                         <input type="hidden" name="idUsuario" value="{{  $usuarioId  }}">
-    
+
                         <div class="row">
                             <div class="container mt-3" align="right"><br>
                                 <input type="submit" class="btn btn-primary" value="Register">
                             </div>
-    
+
                         </div>
                     </form>
-                    
-    
+
+
                 </div>
                 @if (session('success'))
                         <div class="alert alert-success">
@@ -131,7 +131,7 @@
                                             @elseif ($convidado->status == 1 || $convidado->status == 2)
                                                 <p class="text-success">Aprovado</p>
                                             @endif
-    
+
                                         @elseif (auth()->id() == 1)
                                             @if ($convidado->status == 1)
                                                 <p class="">Em espera</p>
@@ -140,14 +140,14 @@
                                             @endif
                                         @endif
                                         </td>
-    
+
                                         @if ($convidado->status == 0)
                                             <form action="{{ route('status.update', ['id' => $convidado->id]) }}" method="post">
                                                 @csrf
                                                 <td scope="col">
                                                     <input type="hidden" name="novo_status" value="1">
                                                     <button type="submit" class="btn btn-success btn-sm">Aprovar</button>
-    
+
                                                 </td>
                                             </form>
                                         @elseif ($convidado->status == 1 && auth()->id() == 1)
@@ -156,13 +156,13 @@
                                                 <td scope="col">
                                                     <input type="hidden" name="novo_status" value="2">
                                                     <button type="submit" class="btn btn-success btn-sm">Presente</button>
-    
+
                                                 </td>
                                             </form>
                                         @else
                                         <td></td>
                                         @endif
-    
+
                                         @if (auth()->id() != 1)
                                             <form action="{{ route('forms.destroy', $convidado->id) }}" method="POST" style ="display:inline">
                                                 @csrf
@@ -178,7 +178,7 @@
                     @endforeach
                     </tbody>
                 </table>
-    
+
                 @endauth
                 </div>
             </div>
@@ -208,6 +208,21 @@
             alert('CPF ' + index + ' inválido!');
             return false;
         }
+
+        let j=0;
+        for (let i = 0; i < 10; i++) {
+            if(cpf.charAt(i) != cpf.charAt(i+1))
+                break;
+            else
+                j++;
+        }
+
+        if(j == 10) {
+            alert('CPF ' + index + ' inválido!');
+            return false;
+        }
+        // alert(cpf.charAt(i));
+        // alert(cpf.charAt(i+1));
 
         for (let i = 0; i < 9; i++) {
             soma += cpf.charAt(i) * (10 - i);
@@ -258,11 +273,11 @@
             </div>
             <div class="col-md-2">
                 <label>Idade</label>
-                <input name="idade${cont}" type="number" class="form-control" pattern="[0-9]+" min="0" required>
+                <input name="idade${cont}" type="number" class="form-control" pattern="[0-9]+" min="0" max="200" required>
             </div>
             <div class="col-md-4">
                 <label>CPF (só números)</label>
-                <input name="CPF${cont}" id="cpf${cont}" type="number" class="form-control" required>
+                <input name="CPF${cont}" id="cpf${cont}" type="text" class="form-control" oninput="arrumarCPF(this)" maxlength="11" required>
             </div>`;
 
                 maisConvidados.appendChild(novaDiv);

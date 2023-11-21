@@ -8,7 +8,7 @@
     </div>
 
     <a href="{{ route('aniversdashboard')}}" id="logout">Dashboard</a>
-    
+
     <div class="formfesta">
 
         <h3 align="center" class="mt-5">Nova Festa</h3>
@@ -30,7 +30,7 @@
 
                         <div class="col-md-2" align="center">
                             <label>Idade</label>
-                            <input type="number" name="idade" id="idade" class="form-control" pattern="[0-9]+" min="0" required>
+                            <input type="number" name="idade" id="idade" class="form-control" pattern="[0-9]+" min="0" max="200" required>
 
                         </div>
 
@@ -68,7 +68,7 @@
 
                         <div class="col-md-3" align="center">
                             <label>Num de Convidados</label>
-                            <input type="number" name="numconvidados" id="numconvidados" class="form-control" pattern="[0-9]+" min="0" title="Apenas números inteiros são permitidos" required>
+                            <input type="number" name="numconvidados" id="numconvidados" class="form-control" pattern="[0-9]+" min="0" max="5000" title="Apenas números inteiros são permitidos" required>
                         </div>
 
                         <div class="col-md-3">

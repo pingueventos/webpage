@@ -21,7 +21,7 @@
         <li>3 Imagens</li>
         <li>Preco</li>
     </ul>
-    
+
     <h3>Opcao 2:</h3>
     <ul>
         <li>Descricao do pacote de comida</li>
@@ -40,36 +40,36 @@
             <div class="form-group">
             <label>Título</label><br>
             <input name="titulo" type="text" placeholder=""><br><br>
-        
+
                 <div>
                     <label for="comidas">Pacote Comida</label>
                     <textarea name="comidas" id="comidas" cols="30" rows="10"></textarea><br><br>
                 </div>
-        
+
                 <label>Pacote Bebidas</label>
                     <textarea name="bebidas" id="bebidas" cols="30" rows="10"></textarea><br><br>
-        
+
                 <div class="mb-6">
                     <label for="">Imagem 1</label><br>
                         <input type="file" name="imagem1" >
                 </div>
-        
+
                 <div class="mb-6">
                     <br><label for="">Imagem 2</label><br>
                         <input type="file" name="imagem2" >
                 </div>
-        
+
                 <div class="mb-6">
                     <br><label for="">Imagem 3</label><br>
                         <input type="file" name="imagem3" >
                 </div>
-        
+
                 <br><label>Preço em reais</label><br>
                 <input name="preco" type="number" placeholder=""><br><br>
-        
+
                 <input type="submit" class="btn btn-primary" value="Adicionar">
     </div>
-    
+
             <script>
                 ClassicEditor
                     .create( document.querySelector( '#comidas' ) )
@@ -84,24 +84,24 @@
                         console.error( error );
                     } );
             </script>
-    
+
             {{-- <label for="image">Imagem 1</label>
             <input type="file" name="imagem1">
-    
+
             <label for="image">Imagem 2</label>
             <input type="file" name="imagem2">
-    
+
             <label for="image">Imagem 3</label>
             <input type="file" name="imagem3"> --}}
     </form>
         </div>
-    
+
     @if(auth()->id() == 3)
     <a href="{{  route('admindashboard')  }}" id="logout">Dashboard</a> <br><br>
     @else
     <a href="{{  route('comercdashboard')  }}" id="logout">Dashboard</a> <br><br>
     @endif
-    
+
     @if (session('success'))
         <div class="alert alert-success">
         {{ session('success') }}
