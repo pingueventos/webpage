@@ -2,10 +2,12 @@
 
 @section('content')
 
-<a href="{{  route('operacsdashboard')  }}">Dashboard</a> <br><br>
+<div class="header">
+    <img src="/css/images_css/logo.png" id="logo">
+</div>
+
+<a href="{{  route('operacsdashboard')  }}" id="logout">Dashboard</a> <br><br>
     
-
-
 <table class="table mt-5">
     <thead>
         <tr>

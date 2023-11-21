@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Aniversariante',
             'email' => 'pingu@anivers.com',
 # Defina a senha do usuário teste aniversariante
-            'password' => Hash::make(''),
+            'password' => Hash::make('anivers'),
             'role' => 'anivers'
         ];
 
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'name' => 'Operacional',
                 'email' => 'pingu@operac.com',
 # Defina a senha do usuário operacional
-                'password' => Hash::make(''),
+                'password' => Hash::make('operac'),
                 'role' => 'operac',
             ],
 
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 'name' => 'Comercial',
                 'email' => 'pingu@comerc.com',
 # Defina a senha do usuário comercial
-                'password' => Hash::make(''),
+                'password' => Hash::make('comerc'),
                 'role' => 'comerc'
             ],
 
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
                 'name' => 'Administrativo',
                 'email' => 'pingu@admin.com',
 # Defina a senha do usuário administrativo
-                'password' => Hash::make(''),
+                'password' => Hash::make('admin'),
                 'role' => 'admin',
             ],
         ]);

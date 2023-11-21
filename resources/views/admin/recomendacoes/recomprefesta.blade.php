@@ -2,41 +2,46 @@
 
 @section('content')
 
-@if (auth()->id()==3)
-    <a href="{{  route('admindashboard')  }}">Dashboard</a>
-@else
-    <a href="{{  route('comercdashboard')  }}">Dashboard</a>
-@endif
-
-
-<div class="container text-center">
-
-<h4>Recomendações pré-festa</h4>
+<div class="header">
+        <img src="/css/images_css/logo.png" id="logo">
+</div>
 
 @if (auth()->id()==3)
-    <form action="{{ route('adicionarRecomendacaoAdmin') }}" method="get">
+    <a href="{{  route('admindashboard')  }}" id="logout">Dashboard</a>
 @else
-    <form action="{{ route('adicionarRecomendacaoComerc') }}" method="get">
-@endif
-    @csrf <br>
-    {{-- <div class="container text-center" > --}}
-        <input type="text" name="novaRecomendacao" id="novaRecomendacao">
-    <button class="btn btn-success btn-sm" type="submit">Adicionar</button>
-    </form>
-
-    @if (session('success'))
-    <div class="alert alert-success">
-    {{ session('success') }}
-    </div>
+    <a href="{{  route('comercdashboard')  }}" id="logout">Dashboard</a>
 @endif
 
-<table class="table mt-5">
+<div class="corpo_recadmin" align="center">
+
+<div class="box_rec">
+    <h4>Recomendações pré-festa</h4>
+    
+    @if (auth()->id()==3)
+        <form action="{{ route('adicionarRecomendacaoAdmin') }}" method="get">
+    @else
+        <form action="{{ route('adicionarRecomendacaoComerc') }}" method="get">
+    @endif
+        @csrf <br>
+        {{-- <div class="container text-center" > --}}
+            <input type="text" name="novaRecomendacao" id="novaRecomendacao">
+        <button class="btn btn-success btn-sm" type="submit">Adicionar</button>
+        </form>
+    
+        @if (session('success'))
+        <div class="alert alert-success">
+        {{ session('success') }}
+        </div>
+    @endif
+</div>
+
+<table class="tabela">
     <thead class="text-center">
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Recomendação</th>
-        <th scope="col">Ação</th>
-        <th scope="col"></th>
+        <th id="nomecol" scope="col">#</th>
+        <th id="nomecol" scope="col">Recomendação</th>
+        <th id="nomecol" scope="col">Editar</th>
+        <th id="nomecol" scope="col">Apagar</th>
     </tr>
     </thead>
 

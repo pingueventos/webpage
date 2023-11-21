@@ -9,61 +9,63 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="/css/pag_inicial.css?v=3">
+
+        <link rel="shortcut icon" href="/css/images_css/logo_icon.png" type="image/x-icon">
     </head>
+    
     <body class="antialiased">
 
-        <div class="container" style="text-align:right;">
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    @auth
-                        <a href="{{ url(Auth::user()->role . '/dashboard') }}">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-        </div>
-
-        <div>
-
-            <div>
-                <h1>Agenda</h1>
-
-                <table cellspacing="8" cellpadding="8">
-                    <caption>Disponibilidade de Serviços</caption>
-                    <thead>
-                        <th>Data</th>
-                        <th>Dia da semana</th>
-                        @for($hora=0; $hora<24; $hora++)
-                            @php
-                                $horario=str_pad($hora, 2, '0', STR_PAD_LEFT)
-                            @endphp
-                            <th>{{ $horario }}h</th>
-                        @endfor
-                    </thead>
-                    <tbody id="agendaBody">
-                        @foreach($agenda->take(7) as $dia)
-                            <tr>
-
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <p> <?php $indicesemana ?> </p>
-
-                    <button onclick="mostrarAnteriores()">Semana Anterior</button>
-                    <button onclick="mostrarProximos()">Próxima Semana</button>
-
+        <div class="header"><img src="/css/images_css/logo.png" id="logo"></div>    
+    
+    
+        <div class="posicao" style="text-align:right;">
+                @if (Route::has('login'))
+                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+                        @auth
+                            <a class="botoes" href="{{ url(Auth::user()->role . '/dashboard') }}">Dashboard</a>
+                        @else
+                            <a class="botoes" href="{{ route('login') }}">Log in</a>
+                            @if (Route::has('register'))
+                                <a class="botoes" href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
             </div>
-        </div>
-
-        <div>
-        </div>
+            
+        <div class="corpo">
+            <div>
+                <div>
+                    <h1>Agenda</h1>
+                    <table cellspacing="8" cellpadding="8">
+                        <caption>Disponibilidade de Serviços</caption>
+                        <thead>
+                            <th>Data</th>
+                            <th>Dia da semana</th>
+                            @for($hora=0; $hora<24; $hora++)
+                                @php
+                                    $horario=str_pad($hora, 2, '0', STR_PAD_LEFT)
+                                @endphp
+                                <th>{{ $horario }}h</th>
+                            @endfor
+                        </thead>
+                        <tbody id="agendaBody">
+                            @foreach($agenda->take(7) as $dia)
+                                <tr>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <p> <?php $indicesemana ?> </p>
+                        <button onclick="mostrarAnteriores()">Semana Anterior</button>
+                        <button onclick="mostrarProximos()">Próxima Semana</button>
+                </div>
+            </div>
+            <div>
+            </div>
+    </div>
 
     </body>
 </html>

@@ -2,16 +2,20 @@
 
 @section('content')
 
+<div class="header">
+        <img src="/css/images_css/logo.png" id="logo">
+</div>
+
 @if(auth()->id()==3)
-    <a href="{{ route('listaRecomendacoesAdmin') }}">Voltar</a><br>
-    <a href="{{ route('admindashboard') }}">Dashboard</a>
+    <a href="{{ route('listaRecomendacoesAdmin') }}" id="voltar">Voltar</a><br>
+    <a href="{{ route('admindashboard') }}" id="logout">Dashboard</a>
 @else
-    <a href="{{ route('listaRecomendacoesComerc') }}">Voltar</a><br>
-    <a href="{{ route('comercdashboard') }}">Dashboard</a>
+    <a href="{{ route('listaRecomendacoesComerc') }}" id="voltar">Voltar</a><br>
+    <a href="{{ route('comercdashboard') }}" id="logout">Dashboard</a>
 @endif
 
 <br><br>
-<div class="container text-center">
+<div class="box_editrec" align="center">
 <h4>Editar Recomendação</h4><br>
 
 @if(auth()->id()==3)
