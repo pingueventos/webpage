@@ -30,30 +30,12 @@
                     <thead>
                         <th>Data</th>
                         <th>Dia da semana</th>
-                        <th>00h</th>
-                        <th>01h</th>
-                        <th>02h</th>
-                        <th>03h</th>
-                        <th>04h</th>
-                        <th>05h</th>
-                        <th>06h</th>
-                        <th>07h</th>
-                        <th>08h</th>
-                        <th>09h</th>
-                        <th>10h</th>
-                        <th>11h</th>
-                        <th>12h</th>
-                        <th>13h</th>
-                        <th>14h</th>
-                        <th>15h</th>
-                        <th>16h</th>
-                        <th>17h</th>
-                        <th>18h</th>
-                        <th>19h</th>
-                        <th>20h</th>
-                        <th>21h</th>
-                        <th>22h</th>
-                        <th>23h</th>
+                        @for($hora=0; $hora<24; $hora++)
+                            @php
+                                $horario=str_pad($hora, 2, '0', STR_PAD_LEFT)
+                            @endphp
+                            <th>{{ $horario }}h</th>
+                        @endfor
                     </thead>
                     <tbody id="agendaBody">
                         @foreach($agenda->take(7) as $dia)
@@ -126,34 +108,13 @@
 
             proximosElementos.forEach(dia => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${dia.dia}</td>
-                    <td>${dia.diadasemana}</td>
-                    <td>${dia.h00}</td>
-                    <td>${dia.h01}</td>
-                    <td>${dia.h02}</td>
-                    <td>${dia.h03}</td>
-                    <td>${dia.h04}</td>
-                    <td>${dia.h05}</td>
-                    <td>${dia.h06}</td>
-                    <td>${dia.h07}</td>
-                    <td>${dia.h08}</td>
-                    <td>${dia.h09}</td>
-                    <td>${dia.h10}</td>
-                    <td>${dia.h11}</td>
-                    <td>${dia.h12}</td>
-                    <td>${dia.h13}</td>
-                    <td>${dia.h14}</td>
-                    <td>${dia.h15}</td>
-                    <td>${dia.h16}</td>
-                    <td>${dia.h17}</td>
-                    <td>${dia.h18}</td>
-                    <td>${dia.h19}</td>
-                    <td>${dia.h20}</td>
-                    <td>${dia.h21}</td>
-                    <td>${dia.h22}</td>
-                    <td>${dia.h23}</td>
-                `;
+            row.innerHTML += `<td>${dia.dia}</td>`;
+            row.innerHTML += `<td>${dia.diadasemana}</td>`;
+
+            for (let hora = 0; hora < 24; hora++) {
+                const horario = `h${hora.toString().padStart(2, '0')}`;
+                row.innerHTML += `<td>${dia[horario]}</td>`;
+            }
             tbody.appendChild(row);
         });
         elementosExibidos += 7;
